@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSV Holidays — Travel Tamil Nadu in Liquid Glass</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Plus Jakarta Sans','sans-serif'],serif:['Instrument Serif','serif']}}}}</script>
+<style>
+*{ -webkit-font-smoothing:antialiased }
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background: #f6f8ff;
+  overflow-x:hidden;
+  color:#1a2040;
+}
+.mesh-bg{
+  position:fixed; inset:0; z-index:-3;
+  background: radial-gradient(at 0% 0%, #c6dcff 0%, transparent 50%),
+              radial-gradient(at 30% 10%, #d9c7ff 0%, transparent 40%),
+              radial-gradient(at 90% 20%, #ffcfdc 0%, transparent 45%),
+              radial-gradient(at 20% 80%, #c7f0ff 0%, transparent 50%),
+              radial-gradient(at 80% 90%, #ffd6a8 0%, transparent 40%),
+              linear-gradient(180deg, #eaf2ff 0%, #f7f0ff 50%, #fff5f7 100%);
+}
+.noise::after{
+  content:''; position:fixed; inset:0; z-index:-2; opacity:.03; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+.blob{
+  position:fixed; border-radius:50%; filter:blur(40px); z-index:-1; mix-blend-mode:soft-light; animation:float 18s infinite ease-in-out;
+}
+.blob-1{ width:700px; height:700px; background:radial-gradient(circle, #9ec5ff 0%, #a8a6ff 60%, transparent 70%); left:-10%; top:-15%; animation-delay:0s }
+.blob-2{ width:600px; height:600px; background:radial-gradient(circle, #ffb7d1 0%, #ffc8a8 60%, transparent 70%); right:-5%; top:5%; animation-delay:-4s }
+.blob-3{ width:800px; height:800px; background:radial-gradient(circle, #a7f3ff 0%, #b8c6ff 60%, transparent 70%); left:20%; bottom:-20%; animation-delay:-8s }
+@keyframes float{
+  0%,100%{ transform:translate(0,0) scale(1) }
+  33%{ transform:translate(30px,-30px) scale(1.05) }
+  66%{ transform:translate(-20px,20px) scale(0.95) }
+}
+/* LIQUID GLASS CORE */
+.glass{
+  background: linear-gradient(135deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.18) 100%);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 8px 32px rgba(31,50,120,0.08), 0 2px 8px rgba(31,50,120,0.04), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 -1px 0 rgba(255,255,255,0.3);
+}
+.glass-dark{
+  background: linear-gradient(135deg, rgba(18,28,70,0.55) 0%, rgba(18,28,70,0.25) 100%);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 16px 48px rgba(0,10,40,0.22), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.glass-pill{
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 #fff;
+}
+.glass-card{
+  background: linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.22) 100%);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 12px 40px rgba(40,60,130,0.10), 0 2px 10px rgba(40,60,130,0.06), inset 0 1.5px 0 rgba(255,255,255,0.9);
+  border-radius: 24px;
+  position:relative;
+  overflow:hidden;
+}
+.glass-card::before{
+  content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none;
+}
+.liquid-shape{
+  border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.15));
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 20px 60px rgba(80,90,180,0.18), inset 0 2px 0 rgba(255,255,255,0.8), inset 0 -1px 10px rgba(255,255,255,0.4);
+}
+.shimmer::after{
+  content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+  transform:translateX(-100%) rotate(15deg); animation:shimmer 6s infinite;
+}
+@keyframes shimmer{ 0%{transform:translateX(-100%) rotate(15deg)} 30%,100%{transform:translateX(100%) rotate(15deg)} }
+.btn-glass{
+  background: linear-gradient(135deg, #1e2a5a 0%, #2a3b80 100%);
+  color:white; border-radius:100px; padding:12px 24px; font-weight:600; letter-spacing:0.02em;
+  box-shadow: 0 8px 20px rgba(30,42,90,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);
+}
+.btn-glass:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(30,42,90,0.32) }
+.btn-glass-light{
+  background: rgba(255,255,255,0.9); color:#1a2040; border:1px solid rgba(255,255,255,0.9);
+  border-radius:100px; padding:11px 22px; font-weight:600;
+  backdrop-filter:blur(12px); box-shadow:0 4px 16px rgba(0,0,0,0.06), inset 0 1px 0 #fff;
+  transition:all .25s ease;
+}
+.btn-glass-light:hover{ background:#fff; transform:translateY(-1px) }
+.tag{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; padding:5px 11px; border-radius:100px; }
+.scroll-hide::-webkit-scrollbar{display:none} .scroll-hide{-ms-overflow-style:none; scrollbar-width:none}
+</style>
+</head>
+<body>
+<div class="mesh-bg"></div>
+<div class="noise"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- NAV - iOS 26 liquid pill style -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-[1120px]">
+  <div class="glass-pill rounded-[28px] px-5 md:px-7 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#1e2a5a] to-[#6a7dff] flex items-center justify-center text-white font-bold text-[14px] shadow-lg">M</div>
+      <div>
+        <div class="font-extrabold tracking-tight leading-none text-[15px]">MSV HOLIDAYS</div>
+        <div class="text-[10px] tracking-[0.18em] font-bold opacity-60 -mt-[1px]">TAMILNADU • LIQUID</div>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-7 text-[13.5px] font-medium">
+      <a href="#destinations" class="hover:opacity-60 transition">Destinations</a>
+      <a href="#packages" class="hover:opacity-60 transition">Packages</a>
+      <a href="#experiences" class="hover:opacity-60 transition">Experiences</a>
+      <a href="#" class="opacity-50">Journal</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="hidden md:inline-flex btn-glass-light text-[13px]">Enquire</button>
+      <button class="btn-glass text-[13px] px-5 py-[10px]">Book Trip →</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="pt-[116px] pb-12 px-[5%] max-w-[1280px] mx-auto">
+  <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-start">
+    <!-- Left copy -->
+    <div class="relative">
+      <div class="inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-[11px] font-bold tracking-widest uppercase">Android Canary 2605 • Liquid Glass Era</span>
+        <span class="tag bg-white/80 ml-1">New</span>
+      </div>
+      <h1 class="font-serif text-[46px] md:text-[68px] leading-[0.92] tracking-[-0.03em]">
+        Travel<br>
+        <span class="italic font-light">Tamil Nadu</span><br>
+        in liquid light.
+      </h1>
+      <p class="mt-6 text-[16.5px] leading-7 opacity-70 max-w-[46ch] font-[400]">
+        MSV Holidays crafts frosted-glass journeys — blur the noise, focus the moment. 
+        From misty Nilgiris to temple coasts, every itinerary is a translucent layer of memory.
+      </p>
+      
+      <!-- Search - Android 15 + iOS 26 inspired -->
+      <div class="mt-8 glass-card p-2 rounded-[28px] flex flex-wrap gap-2">
+        <div class="flex-1 min-w-[160px] glass rounded-[18px] px-4 py-3 flex items-center gap-3">
+          <span class="text-lg">📍</span>
+          <div><div class="text-[10px] font-bold tracking-widest uppercase opacity-50">Where</div><div class="text-[14px] font-semibold">Ooty, Kodaikanal, Madurai...</div></div>
+        </div>
+        <div class="flex-1 min-w-[120px] glass rounded-[18px] px-4 py-3 flex items-center gap-3">
+          <span class="text-lg">🗓️</span>
+          <div><div class="text-[10px] font-bold tracking-widest uppercase opacity-50">When</div><div class="text-[14px] font-semibold">Dec 12-18</div></div>
+        </div>
+        <div class="flex-1 min-w-[110px] glass rounded-[18px] px-4 py-3 flex items-center gap-3">
+          <span class="text-lg">👥</span>
+          <div><div class="text-[10px] font-bold tracking-widest uppercase opacity-50">Guests</div><div class="text-[14px] font-semibold">2 Adults</div></div>
+        </div>
+        <button class="btn-glass h-[56px] px-8 rounded-[18px] text-[14px]">Search</button>
+      </div>
+
+      <div class="mt-6 flex items-center gap-3">
+        <div class="flex -space-x-3">
+          <img src="https://i.pravatar.cc/100?img=32" class="w-8 h-8 rounded-full border-2 border-white">
+          <img src="https://i.pravatar.cc/100?img=14" class="w-8 h-8 rounded-full border-2 border-white">
+          <img src="https://i.pravatar.cc/100?img=47" class="w-8 h-8 rounded-full border-2 border-white">
+        </div>
+        <div class="text-[13px]"><span class="font-bold">4.9/5</span> <span class="opacity-60">from 2,847 glassy getaways</span></div>
+        <div class="ml-auto hidden md:flex items-center gap-2 glass rounded-full px-3 py-1.5">
+          <div class="w-5 h-5 rounded-full bg-black/10 grid place-items-center text-[10px]">✦</div>
+          <span class="text-[11px] font-semibold">Frosted Glass UI • Blur 32 • Sat 180</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right stack - Notes app style + Sales Report dark -->
+    <div class="relative lg:h-[720px]">
+      <!-- Main liquid card -->
+      <div class="glass-card p-3 rounded-[32px] shadow-[0_24px_80px_rgba(60,70,150,0.18)]">
+        <div class="rounded-[24px] overflow-hidden relative h-[420px] bg-gradient-to-br from-[#dfe9ff] to-[#ffe2ec]">
+          <img src="https://images.unsplash.com/photo-1583243536442-19f8dc8d0c6e?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60">
+          <div class="absolute inset-0 bg-gradient-to-t from-white/80 via-white/20 to-transparent"></div>
+          <!-- Floating file cards like your 1st image -->
+          <div class="absolute top-5 left-5 right-5 flex gap-3">
+            <div class="glass rounded-[14px] px-3 py-2 text-[11px] font-bold tracking-wide">All Notes</div>
+            <div class="bg-black text-white rounded-[14px] px-3 py-2 text-[11px] font-bold">To Do</div>
+            <div class="glass rounded-[14px] px-3 py-2 text-[11px] font-bold ml-auto">Images</div>
+          </div>
+          <div class="absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-3">
+            <div class="glass-card !rounded-[18px] p-3">
+              <div class="text-[11px] font-bold tracking-widest uppercase opacity-60">Shopping List</div>
+              <div class="mt-2 text-[13px] font-medium leading-5">☐ Temple pass<br>☐ Filter coffee<br>☐ Ghat drive</div>
+            </div>
+            <div class="glass-card !rounded-[18px] p-0 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?q=80&w=400&auto=format&fit=crop" class="w-full h-[96px] object-cover">
+              <div class="p-2.5 text-[11px] font-semibold">Thought of the day</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between p-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full overflow-hidden"><img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover"></div>
+            <div><div class="text-[12px] font-bold">Kodaikanal • Mist</div><div class="text-[11px] opacity-60">Today, 9:41 AM</div></div>
+          </div>
+          <div class="flex gap-2"><div class="w-9 h-9 glass rounded-full grid place-items-center">+</div><div class="w-9 h-9 glass rounded-full grid place-items-center">◐</div></div>
+        </div>
+      </div>
+
+      <!-- Sales Report floating dark glass - from your last image -->
+      <div class="absolute -bottom-6 -left-6 md:left-0 glass-dark rounded-[22px] p-4 w-[300px] text-white rotate-[-3deg] hover:rotate-0 transition duration-500">
+        <div class="text-[10px] tracking-widest font-bold opacity-70">SALES REPORT</div>
+        <div class="text-[32px] font-bold leading-none mt-1">$1,024 <span class="text-[13px] font-medium opacity-80">Net volume • 3.2% ↑</span></div>
+        <div class="mt-3 h-[56px] relative overflow-hidden rounded-[12px] bg-white/10">
+          <svg viewBox="0 0 200 60" class="w-full h-full"><path d="M0 45 C 20 40, 40 50, 60 30 S 100 10, 120 25 S 160 35, 200 15" fill="none" stroke="url(#g1)" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0%" stop-color="#6dff9e"/><stop offset="50%" stop-color="#7b6cff"/><stop offset="100%" stop-color="#ff6ec7"/></linearGradient></defs></svg>
+        </div>
+        <div class="mt-3 flex gap-2"><span class="tag bg-white/15">Accessories</span><span class="tag bg-white/15">Mac</span><span class="tag bg-white/10">iPhone</span></div>
+      </div>
+
+      <!-- Morning card -->
+      <div class="absolute -right-4 top-[40%] glass rounded-[20px] p-3 w-[200px] rotate-[4deg] hover:rotate-0 transition duration-500 hidden md:block">
+        <div class="text-[22px] font-serif leading-none">Good<br>Morning</div>
+        <div class="mt-3 rounded-[14px] overflow-hidden"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=300&auto=format&fit=crop" class="w-full h-[110px] object-cover"></div>
+        <div class="mt-3 glass rounded-[14px] p-2.5"><div class="text-[12px] font-bold">Monday<br>Jun 21</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS - Liquid Glass grid -->
+<section id="destinations" class="px-[5%] max-w-[1280px] mx-auto mt-8">
+  <div class="flex items-end justify-between gap-6">
+    <div><div class="tag glass inline-flex mb-3">Frosted Destinations</div><h2 class="font-serif text-[38px] md:text-[52px] leading-[0.9]">Where light bends<br>around Tamil Nadu.</h2></div>
+    <div class="hidden md:block text-[14px] opacity-60 max-w-[28ch]">Inspired by Glassmorphism → Liquid Glass. Translucent layers that blur, refract, and create depth.</div>
+  </div>
+
+  <div class="grid md:grid-cols-12 gap-5 mt-8 auto-rows-[280px]">
+    <!-- Ooty large -->
+    <div class="md:col-span-7 glass-card group p-0 overflow-hidden cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-[1.2s]">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-white/20"></div>
+      <div class="absolute top-5 left-5 flex gap-2"><span class="tag bg-white text-black">Nilgiris • 2,240m</span><span class="tag glass-dark text-white">Blur 28px</span></div>
+      <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+        <div class="flex items-end justify-between"><h3 class="font-serif text-[36px] leading-none">Ooty<br><span class="italic font-light opacity-90">Queen of Hills</span></h3><div class="glass rounded-full px-4 py-2 text-[12px] font-bold text-white">From ₹8,499 →</div></div>
+      </div>
+    </div>
+    <!-- Madurai -->
+    <div class="md:col-span-5 glass-card p-0 overflow-hidden group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1583422409517-716faa24672d?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-[1.2s]">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <div class="absolute top-4 left-4 glass rounded-full px-3 py-1 text-[11px] font-bold">Meenakshi Temple • Heritage</div>
+      <div class="absolute bottom-5 left-5 text-white"><div class="text-[28px] font-serif leading-none">Madurai</div><div class="text-[12px] opacity-80 mt-1">Athens of the East • Night ceremonies</div></div>
+    </div>
+    <!-- Kodaikanal -->
+    <div class="md:col-span-4 glass-card p-0 overflow-hidden group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-white/10"></div>
+      <div class="absolute top-4 left-4 right-4 flex justify-between"><span class="tag bg-white">Lake & Forest</span><span class="w-8 h-8 glass rounded-full grid place-items-center">♡</span></div>
+      <div class="absolute bottom-4 left-4 right-4 glass rounded-[16px] p-3 flex items-center justify-between"><div><div class="font-bold text-[15px]">Kodaikanal</div><div class="text-[11px] opacity-70">Princess of Hill Stations</div></div><div class="btn-glass-light text-[12px] px-3 py-1.5">Explore</div></div>
+    </div>
+    <!-- Rameswaram - liquid shape -->
+    <div class="md:col-span-4 liquid-shape p-5 !rounded-[32px] relative overflow-hidden group cursor-pointer min-h-[280px] flex flex-col justify-between">
+      <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition">
+      <div class="relative z-10"><div class="tag bg-black text-white">Pamban Bridge • Sea</div><h3 class="font-serif text-[30px] leading-[0.9] mt-16 text-white drop-shadow">Rameswaram<br><span class="italic">island pulse</span></h3></div>
+      <div class="relative z-10 glass rounded-[14px] p-3 flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-white grid place-items-center">→</div><div class="text-[13px] font-semibold">Dhanushkodi ghost town<br><span class="text-[11px] opacity-70">Glass kayak at sunrise</span></div></div>
+    </div>
+    <!-- Kanyakumari -->
+    <div class="md:col-span-4 glass-card p-0 overflow-hidden group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#ff8fab]/60 via-transparent to-transparent"></div>
+      <div class="absolute bottom-4 left-4 right-4"><div class="glass-dark text-white rounded-[18px] p-4"><div class="flex justify-between"><div class="font-serif text-[22px] leading-none">Kanyakumari</div><div class="text-[11px] tag bg-white/20">3 Seas</div></div><div class="mt-2 text-[12px] opacity-80">Where Bay of Bengal, Arabian Sea & Indian Ocean meet.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES - iOS call + Android QS inspiration -->
+<section id="experiences" class="px-[5%] max-w-[1280px] mx-auto mt-20">
+  <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+    <div class="glass-card p-7 rounded-[36px]">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-serif text-[28px]">System UI Upgrades</h3>
+        <span class="tag glass">iOS 26 • Android 2605</span>
+      </div>
+      <div class="space-y-3">
+        <div class="glass rounded-[18px] p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8f0ff] grid place-items-center">✈️</div><div><div class="font-semibold text-[14px]">Unified Call History</div><div class="text-[12px] opacity-60">Flights + cabs + guides in one timeline</div></div></div><div class="w-8 h-8 glass rounded-full grid place-items-center">›</div>
+        </div>
+        <div class="glass rounded-[18px] p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#ffe8f0] grid place-items-center">🌫️</div><div><div class="font-semibold text-[14px]">Frosted Glass UI</div><div class="text-[12px] opacity-60">Backdrop blur 32px • Saturation 180%</div></div></div><div class="flex items-center gap-2"><div class="w-12 h-[6px] rounded-full bg-black/10"><div class="w-[70%] h-full bg-black rounded-full"></div></div><span class="text-[12px]">›</span></div>
+        </div>
+        <div class="glass rounded-[18px] p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8ffe8] grid place-items-center">🔒</div><div><div class="font-semibold text-[14px]">More Customization</div><div class="text-[12px] opacity-60">Liquid tint, depth, and border control</div></div></div><div class="w-8 h-8 glass rounded-full grid place-items-center">⚙️</div>
+        </div>
+      </div>
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <div class="glass rounded-[16px] p-4 text-center"><div class="text-[22px] font-bold">Blur Effects</div><div class="text-[11px] opacity-60 uppercase tracking-widest font-bold">Smart Layering</div></div>
+        <div class="glass rounded-[16px] p-4 text-center"><div class="text-[22px] font-bold">Smarter Calling</div><div class="text-[11px] opacity-60 uppercase tracking-widest font-bold">One Tap Connect</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="tag glass inline-flex mb-4">Material Aesthetics • Side-by-side</div>
+      <h2 class="font-serif text-[42px] leading-[0.9] tracking-[-0.02em]">From glassmorphism<br>to <span class="italic">liquid glass.</span></h2>
+      <p class="mt-4 opacity-70 leading-7">Your old site was flat. We refracted it. Glassmorphism was translucent layers that blur and refract background, creating depth. Liquid Glass is fluid, organic surfaces that bend light and color, reacting to the world behind them — exactly what Tamil Nadu feels like at 6AM.</p>
+      
+      <div class="mt-8 grid grid-cols-3 gap-4">
+        <div class="glass-card !rounded-[20px] p-5"><div class="text-[11px] font-bold tracking-widest uppercase opacity-50">Glassmorphism</div><div class="mt-3 text-[13px] leading-5 opacity-80">Translucent layers that blur and refract background, creating depth and focus.</div><div class="mt-4 w-8 h-8 glass rounded-full grid place-items-center text-[12px]">→</div></div>
+        <div class="glass rounded-[20px] p-5 border-dashed"><div class="text-[11px] font-bold tracking-widest uppercase opacity-50">Neumorphism</div><div class="mt-3 text-[13px] opacity-60">Soft extruded plastic. We skipped it.</div><div class="mt-6 text-[11px] opacity-40">Not for travel</div></div>
+        <div class="liquid-shape !rounded-[24px] p-5"><div class="text-[11px] font-bold tracking-widest uppercase">Liquid Glass</div><div class="mt-3 text-[13px] leading-5">Fluid, organic surfaces that bend light and color, reacting to world behind them.</div><div class="mt-4 w-8 h-8 bg-white rounded-full grid place-items-center">→</div></div>
+      </div>
+
+      <div class="mt-8 glass-dark text-white rounded-[24px] p-5 flex items-center gap-4">
+        <div class="w-14 h-14 rounded-full overflow-hidden"><img src="https://images.unsplash.com/photo-1603262110263-fb3a02f3f39d?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover"></div>
+        <div><div class="font-semibold">Hold This Trip?</div><div class="text-[12px] opacity-70">You'll be notified to pick up when fares drop.</div></div>
+        <button class="ml-auto glass rounded-full px-4 py-2 text-[12px] font-bold">Hold</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="px-[5%] max-w-[1280px] mx-auto mt-24">
+  <div class="flex items-end justify-between">
+    <h2 class="font-serif text-[40px] leading-none">Curated<br><span class="italic">glass routes</span></h2>
+    <div class="hidden md:flex gap-2"><button class="w-10 h-10 glass rounded-full grid place-items-center">←</button><button class="w-10 h-10 glass-pill rounded-full grid place-items-center">→</button></div>
+  </div>
+  <div class="mt-8 grid md:grid-cols-3 gap-6">
+    <div class="glass-card p-3 rounded-[28px] group cursor-pointer">
+      <div class="h-[220px] rounded-[20px] overflow-hidden relative"><img src="https://images.unsplash.com/photo-1526772661823-3f88f33771cd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"><div class="absolute top-3 left-3 tag bg-white">3N / 4D • Best Seller</div><div class="absolute bottom-3 left-3 right-3 glass rounded-[14px] p-2.5 flex justify-between text-[12px] font-semibold"><span>☁️ 19°C mist</span><span>⭐ 4.9</span></div></div>
+      <div class="p-4"><h3 class="font-bold text-[18px]">Nilgiri Glass Trail</h3><p class="text-[13px] opacity-60 mt-1 leading-5">Ooty • Coonoor toy train • Avalanche lake glass kayak</p><div class="mt-4 flex items-center justify-between"><div class="text-[20px] font-bold">₹12,499 <span class="text-[12px] opacity-50 font-medium">/ person</span></div><div class="btn-glass-light text-[12px]">Book</div></div></div>
+    </div>
+    <div class="glass-card p-3 rounded-[28px] group cursor-pointer">
+      <div class="h-[220px] rounded-[20px] overflow-hidden relative"><img src="https://images.unsplash.com/photo-1596178312682-3e6f4e8e86de?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"><div class="absolute top-3 left-3 tag bg-black text-white">Temple • Culture</div></div>
+      <div class="p-4"><h3 class="font-bold text-[18px]">Temple Coast Blur</h3><p class="text-[13px] opacity-60 mt-1 leading-5">Madurai • Rameswaram • Kanyakumari sunrise glass boat</p><div class="mt-4 flex items-center justify-between"><div class="text-[20px] font-bold">₹14,999 <span class="text-[12px] opacity-50 font-medium">/ person</span></div><div class="btn-glass-light text-[12px]">Book</div></div></div>
+    </div>
+    <div class="glass-card p-3 rounded-[28px] group cursor-pointer">
+      <div class="h-[220px] rounded-[20px] overflow-hidden relative"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"><div class="absolute top-3 left-3 tag glass-dark text-white">Luxury • Liquid</div></div>
+      <div class="p-4"><h3 class="font-bold text-[18px]">Kodaikanal Cloud Glass</h3><p class="text-[13px] opacity-60 mt-1 leading-5">Private villa • Berijam forest • Starlit glass dining</p><div class="mt-4 flex items-center justify-between"><div class="text-[20px] font-bold">₹18,499 <span class="text-[12px] opacity-50 font-medium">/ person</span></div><div class="btn-glass-light text-[12px]">Book</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER GLASS -->
+<footer class="mt-24 px-[5%] pb-10">
+  <div class="max-w-[1280px] mx-auto glass-card rounded-[32px] p-8 md:p-12 relative overflow-hidden">
+    <div class="grid md:grid-cols-[1.2fr_.8fr_.8fr_.8fr] gap-10">
+      <div>
+        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e2a5a] to-[#6a7dff] grid place-items-center text-white font-bold">M</div><div class="font-extrabold">MSV HOLIDAYS</div></div>
+        <p class="mt-4 text-[13px] leading-6 opacity-60 max-w-[28ch]">We don't sell trips. We sell refraction — where your world blurs and Tamil Nadu comes into focus. Liquid Glass travel, made in Madurai.</p>
+        <div class="mt-6 flex gap-2"><span class="tag glass">Blur 32</span><span class="tag glass">Sat 180</span><span class="tag glass">Refraction</span></div>
+      </div>
+      <div><div class="font-bold text-[12px] tracking-widest uppercase opacity-50 mb-4">Destinations</div><div class="space-y-2 text-[14px]"><div>Ooty Glass Trail</div><div>Kodaikanal Cloud</div><div>Madurai Temple</div><div>Rameswaram Liquid</div></div></div>
+      <div><div class="font-bold text-[12px] tracking-widest uppercase opacity-50 mb-4">System</div><div class="space-y-2 text-[14px]"><div>Frosted UI Kit</div><div>Volume & Power Menu</div><div>Calls & Unified History</div><div>More Blur.</div></div></div>
+      <div class="glass rounded-[20px] p-5"><div class="font-bold">Get liquid updates</div><div class="text-[12px] opacity-60 mt-1">Blur, smarter calling, new features.</div><div class="mt-4 flex gap-2"><input placeholder="you@mail.com" class="flex-1 glass rounded-full px-4 py-2.5 text-[13px] outline-none bg-white/60"><button class="btn-glass text-[13px] px-5 py-2.5">→</button></div></div>
+    </div>
+    <div class="mt-10 pt-6 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12px] opacity-60"><div>© 2026 MSV Holidays • Built for Cloudflare Pages • Single-file deploy</div><div class="flex gap-4"><span>Instagram</span><span>Privacy • Glass Policy</span><span>Made in Madurai</span></div></div>
+  </div>
+</footer>
+
+<script>
+// subtle parallax for blobs
+document.addEventListener('mousemove', (e)=>{
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  document.querySelectorAll('.blob').forEach((b,i)=>{
+    const factor = (i+1)*0.6;
+    b.style.transform = `translate(${x*factor}px, ${y*factor}px) scale(1)`;
+  });
+});
+</script>
+</body>
+</html>
