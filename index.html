@@ -2,387 +2,754 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MSV Holidays — Travel Tamil Nadu in Liquid Glass</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Plus Jakarta Sans','sans-serif'],serif:['Instrument Serif','serif']}}}}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MSV Holidays — Tamil Nadu Tours & Cabs</title>
+<meta name="description" content="MSV Holidays, Madurai. Tamil Nadu tour packages, cab rentals and custom trips.">
+<meta name="theme-color" content="#eaf1ff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-*{ -webkit-font-smoothing:antialiased }
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background: #f6f8ff;
-  overflow-x:hidden;
-  color:#1a2040;
+:root{
+  --ink:#141a3a; --ink2:#4a5280; --line:rgba(255,255,255,.65);
+  --brand:#2a3b9a; --brand2:#6a7dff; --accent:#ff7a59; --ok:#16a36a; --bad:#e5484d; --warn:#e9a30c;
+  --r:26px; --blur:18px;
+  --ease:cubic-bezier(.22,.8,.22,1);
 }
-.mesh-bg{
-  position:fixed; inset:0; z-index:-3;
-  background: radial-gradient(at 0% 0%, #c6dcff 0%, transparent 50%),
-              radial-gradient(at 30% 10%, #d9c7ff 0%, transparent 40%),
-              radial-gradient(at 90% 20%, #ffcfdc 0%, transparent 45%),
-              radial-gradient(at 20% 80%, #c7f0ff 0%, transparent 50%),
-              radial-gradient(at 80% 90%, #ffd6a8 0%, transparent 40%),
-              linear-gradient(180deg, #eaf2ff 0%, #f7f0ff 50%, #fff5f7 100%);
-}
-.noise::after{
-  content:''; position:fixed; inset:0; z-index:-2; opacity:.03; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-.blob{
-  position:fixed; border-radius:50%; filter:blur(40px); z-index:-1; mix-blend-mode:soft-light; animation:float 18s infinite ease-in-out;
-}
-.blob-1{ width:700px; height:700px; background:radial-gradient(circle, #9ec5ff 0%, #a8a6ff 60%, transparent 70%); left:-10%; top:-15%; animation-delay:0s }
-.blob-2{ width:600px; height:600px; background:radial-gradient(circle, #ffb7d1 0%, #ffc8a8 60%, transparent 70%); right:-5%; top:5%; animation-delay:-4s }
-.blob-3{ width:800px; height:800px; background:radial-gradient(circle, #a7f3ff 0%, #b8c6ff 60%, transparent 70%); left:20%; bottom:-20%; animation-delay:-8s }
-@keyframes float{
-  0%,100%{ transform:translate(0,0) scale(1) }
-  33%{ transform:translate(30px,-30px) scale(1.05) }
-  66%{ transform:translate(-20px,20px) scale(0.95) }
-}
-/* LIQUID GLASS CORE */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:#eef3ff;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:84px}
+@media(min-width:900px){body{padding-bottom:0}}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.serif{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-.02em}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ---------- BACKGROUND (transform-only animation = smooth) ---------- */
+.bg{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(60% 50% at 10% 0%,#c9dcff 0,transparent 70%),
+  radial-gradient(50% 45% at 95% 10%,#ffd3e0 0,transparent 70%),
+  radial-gradient(60% 50% at 50% 100%,#c8f1ff 0,transparent 70%),
+  linear-gradient(180deg,#eaf2ff,#f6f0ff 55%,#fff4f6)}
+.orb{position:fixed;z-index:-1;border-radius:50%;pointer-events:none;will-change:transform;opacity:.75}
+.o1{width:520px;height:520px;left:-140px;top:-120px;background:radial-gradient(circle at 35% 35%,#a9c4ff,#8f8bff 55%,transparent 70%);animation:fl 22s ease-in-out infinite}
+.o2{width:460px;height:460px;right:-120px;top:25vh;background:radial-gradient(circle at 40% 40%,#ffbfd6,#ffc9a6 55%,transparent 70%);animation:fl 26s ease-in-out -6s infinite}
+.o3{width:560px;height:560px;left:25vw;bottom:-260px;background:radial-gradient(circle at 40% 40%,#a8f1ff,#b9c4ff 55%,transparent 70%);animation:fl 30s ease-in-out -12s infinite}
+@keyframes fl{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(40px,-34px,0)}}
+
+/* ---------- LIQUID GLASS ---------- */
 .glass{
-  background: linear-gradient(135deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.18) 100%);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.55);
-  box-shadow: 0 8px 32px rgba(31,50,120,0.08), 0 2px 8px rgba(31,50,120,0.04), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 -1px 0 rgba(255,255,255,0.3);
-}
-.glass-dark{
-  background: linear-gradient(135deg, rgba(18,28,70,0.55) 0%, rgba(18,28,70,0.25) 100%);
-  backdrop-filter: blur(32px) saturate(160%);
-  -webkit-backdrop-filter: blur(32px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 16px 48px rgba(0,10,40,0.22), inset 0 1px 0 rgba(255,255,255,0.25);
-}
-.glass-pill{
-  background: rgba(255,255,255,0.72);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.8);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 #fff;
-}
-.glass-card{
-  background: linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.22) 100%);
-  backdrop-filter: blur(24px) saturate(170%);
-  -webkit-backdrop-filter: blur(24px) saturate(170%);
-  border: 1px solid rgba(255,255,255,0.6);
-  box-shadow: 0 12px 40px rgba(40,60,130,0.10), 0 2px 10px rgba(40,60,130,0.06), inset 0 1.5px 0 rgba(255,255,255,0.9);
-  border-radius: 24px;
   position:relative;
-  overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.52),rgba(255,255,255,.2));
+  backdrop-filter:blur(var(--blur)) saturate(190%) brightness(1.04);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(190%) brightness(1.04);
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:var(--r);
+  box-shadow:0 10px 34px rgba(36,52,130,.10),0 1px 3px rgba(36,52,130,.06),inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35),inset 0 0 22px rgba(255,255,255,.18);
 }
-.glass-card::before{
-  content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
-  background:linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.3) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none;
-}
-.liquid-shape{
-  border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0.15));
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border:1px solid rgba(255,255,255,0.5);
-  box-shadow: 0 20px 60px rgba(80,90,180,0.18), inset 0 2px 0 rgba(255,255,255,0.8), inset 0 -1px 10px rgba(255,255,255,0.4);
-}
-.shimmer::after{
-  content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
-  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
-  transform:translateX(-100%) rotate(15deg); animation:shimmer 6s infinite;
-}
-@keyframes shimmer{ 0%{transform:translateX(-100%) rotate(15deg)} 30%,100%{transform:translateX(100%) rotate(15deg)} }
-.btn-glass{
-  background: linear-gradient(135deg, #1e2a5a 0%, #2a3b80 100%);
-  color:white; border-radius:100px; padding:12px 24px; font-weight:600; letter-spacing:0.02em;
-  box-shadow: 0 8px 20px rgba(30,42,90,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
-  transition:all .3s cubic-bezier(.2,.8,.2,1);
-}
-.btn-glass:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(30,42,90,0.32) }
-.btn-glass-light{
-  background: rgba(255,255,255,0.9); color:#1a2040; border:1px solid rgba(255,255,255,0.9);
-  border-radius:100px; padding:11px 22px; font-weight:600;
-  backdrop-filter:blur(12px); box-shadow:0 4px 16px rgba(0,0,0,0.06), inset 0 1px 0 #fff;
-  transition:all .25s ease;
-}
-.btn-glass-light:hover{ background:#fff; transform:translateY(-1px) }
-.tag{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; padding:5px 11px; border-radius:100px; }
-.scroll-hide::-webkit-scrollbar{display:none} .scroll-hide{-ms-overflow-style:none; scrollbar-width:none}
+.glass::before{ /* specular rim */
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,0) 40%,rgba(255,255,255,.25) 70%,rgba(255,255,255,.8));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.glass.dark{background:linear-gradient(145deg,rgba(24,34,92,.62),rgba(24,34,92,.34));color:#fff;border-color:rgba(255,255,255,.2)}
+.glass.pill{border-radius:999px}
+.glass.hover{transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.glass.hover:hover{transform:translate3d(0,-4px,0);box-shadow:0 18px 44px rgba(36,52,130,.16),inset 0 1.5px 0 #fff}
+
+/* ---------- BUTTONS / FIELDS ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;font-size:14px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;white-space:nowrap}
+.btn:active{transform:scale(.96)}
+.btn.primary{background:linear-gradient(135deg,#243489,#4d63e8);color:#fff;box-shadow:0 8px 22px rgba(42,59,154,.32),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(42,59,154,.4)}
+.btn.light{background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.06),inset 0 1px 0 #fff}
+.btn.light:hover{background:#fff;transform:translateY(-1px)}
+.btn.wa{background:linear-gradient(135deg,#1fa855,#2fd073);color:#fff;box-shadow:0 8px 22px rgba(31,168,85,.3)}
+.btn.danger{background:rgba(229,72,77,.12);color:var(--bad)}
+.btn.ok{background:rgba(22,163,106,.14);color:var(--ok)}
+.btn.sm{padding:8px 14px;font-size:12.5px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field>span{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2)}
+.in{width:100%;padding:13px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.62);box-shadow:inset 0 1px 3px rgba(36,52,130,.08);outline:0;transition:box-shadow .25s,background .25s;font-size:15px}
+.in:focus{background:#fff;box-shadow:0 0 0 3px rgba(106,125,255,.35),inset 0 1px 3px rgba(36,52,130,.05)}
+textarea.in{min-height:96px;resize:vertical}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.85)}
+.chip{padding:9px 16px;border-radius:999px;font-weight:700;font-size:13px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8);transition:all .3s var(--ease)}
+.chip.on{background:linear-gradient(135deg,#243489,#4d63e8);color:#fff;border-color:transparent}
+.muted{color:var(--ink2)}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+h1.serif{font-size:clamp(44px,8vw,86px);line-height:.95}
+h2.serif{font-size:clamp(34px,5vw,54px);line-height:1}
+section{padding:46px 0;content-visibility:auto;contain-intrinsic-size:auto 600px}
+
+/* ---------- NAV ---------- */
+header.nav{position:fixed;top:12px;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:0 12px;pointer-events:none}
+.nav .bar{pointer-events:auto;width:100%;max-width:1120px;padding:10px 12px 10px 16px;display:flex;align-items:center;gap:18px;border-radius:999px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em}
+.logo i{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#243489,#6a7dff);color:#fff;font-style:normal;box-shadow:0 4px 12px rgba(42,59,154,.4)}
+.logo small{display:block;font-size:9.5px;letter-spacing:.2em;opacity:.55;margin-top:-2px}
+.links{display:none;margin-left:auto;gap:4px}
+.links a{padding:9px 15px;border-radius:999px;font-size:14px;font-weight:600;transition:background .3s}
+.links a:hover{background:rgba(255,255,255,.7)}
+.links a.on{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.nav .cta{margin-left:auto}
+@media(min-width:900px){.links{display:flex}.nav .cta{margin-left:0}}
+.tabbar{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:50;display:flex;justify-content:space-around;padding:8px;border-radius:30px}
+.tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 0;border-radius:22px;font-size:10.5px;font-weight:700;color:var(--ink2);transition:all .3s var(--ease)}
+.tabbar a span{font-size:19px;line-height:1}
+.tabbar a.on{background:#fff;color:var(--brand);box-shadow:0 3px 10px rgba(0,0,0,.08)}
+@media(min-width:900px){.tabbar{display:none}}
+
+/* ---------- VIEW ---------- */
+main{padding-top:92px;min-height:80vh}
+.view{animation:vin .55s var(--ease) both}
+@keyframes vin{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translate3d(0,22px,0);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- HERO ---------- */
+.hero{padding:26px 0 10px}
+.hero p.lead{font-size:clamp(16px,2vw,19px);max-width:52ch;margin-top:18px;color:var(--ink2)}
+.search{margin-top:30px;padding:10px;display:grid;gap:8px;grid-template-columns:1fr;border-radius:30px}
+@media(min-width:760px){.search{grid-template-columns:1.3fr 1fr .8fr auto;border-radius:999px;padding:10px 10px 10px 14px}}
+.search .field{padding:4px 10px}
+.search .in{background:transparent;box-shadow:none;border:0;padding:4px 0;font-weight:600}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px}
+.stats b{font-size:28px;display:block;line-height:1}
+.stats small{font-size:12px;color:var(--ink2)}
+.heroart{margin-top:30px;min-height:300px;border-radius:36px;overflow:hidden;position:relative;display:grid;place-items:center}
+@media(min-width:900px){.hero .split{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}.heroart{margin-top:0;min-height:460px}}
+.float{position:absolute;padding:12px 16px;font-size:13px;font-weight:700;animation:bob 7s ease-in-out infinite;will-change:transform}
+@keyframes bob{50%{transform:translate3d(0,-10px,0)}}
+
+/* ---------- CARDS ---------- */
+.pcard{display:flex;flex-direction:column;padding:10px;cursor:pointer;height:100%}
+.art{position:relative;height:210px;border-radius:calc(var(--r) - 8px);overflow:hidden;display:grid;place-items:center;font-size:64px;background-size:cover;background-position:center}
+.art .badges{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;font-size:0}
+.art::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.28),transparent 45%,rgba(0,0,0,.18))}
+.art>*{position:relative;z-index:1}
+.art .tag{position:relative;z-index:2;font-size:10.5px}
+.pbody{padding:16px 10px 8px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pbody h3{font-size:18px;line-height:1.25;letter-spacing:-.01em}
+.pfoot{margin-top:auto;display:flex;align-items:end;justify-content:space-between;gap:10px;padding-top:10px}
+.price{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.price small{font-size:12px;font-weight:600;color:var(--ink2)}
+.dest{padding:0;overflow:hidden;cursor:pointer;min-height:180px}
+.dest .art{height:100%;min-height:180px;border-radius:inherit;font-size:54px;place-items:center}
+.dest .cap{position:absolute;left:12px;right:12px;bottom:12px;z-index:3;padding:10px 14px;border-radius:18px;color:#fff;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.icon{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.7);box-shadow:inset 0 1px 0 #fff,0 4px 12px rgba(0,0,0,.05)}
+.stars{color:#f5a623;letter-spacing:2px}
+.sec-h{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+
+/* ---------- FORM ---------- */
+.form{padding:22px}
+@media(min-width:700px){.form{padding:32px}}
+.fgrid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.full{grid-column:1/-1}
+.seg{display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(255,255,255,.5);flex-wrap:wrap}
+.seg label{flex:1;min-width:110px;text-align:center;padding:10px 12px;border-radius:999px;font-weight:700;font-size:13.5px;cursor:pointer;transition:all .3s var(--ease)}
+.seg input{display:none}
+.seg input:checked+span{display:block;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.08);color:var(--brand);border-radius:999px;margin:-10px -12px;padding:10px 12px}
+.vgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.vopt input{display:none}
+.vopt span{display:block;padding:12px;border-radius:18px;background:rgba(255,255,255,.55);border:1.5px solid transparent;text-align:center;font-size:13px;font-weight:700;cursor:pointer;transition:all .3s var(--ease)}
+.vopt span small{display:block;font-weight:500;color:var(--ink2);font-size:11.5px}
+.vopt input:checked+span{background:#fff;border-color:var(--brand2);box-shadow:0 0 0 3px rgba(106,125,255,.2)}
+.err{color:var(--bad);font-size:12px;font-weight:600;min-height:0}
+.in.bad{box-shadow:0 0 0 2px var(--bad)}
+
+/* ---------- DETAIL ---------- */
+.day{display:grid;grid-template-columns:48px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed rgba(20,26,58,.12)}
+.day:last-child{border:0}
+.day b.n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#243489,#6a7dff);color:#fff;font-size:12px}
+ul.tick{list-style:none;display:grid;gap:8px}
+ul.tick li{padding-left:26px;position:relative;font-size:14.5px}
+ul.tick li::before{content:'✓';position:absolute;left:0;color:var(--ok);font-weight:800}
+ul.tick.x li::before{content:'✕';color:var(--bad)}
+details{padding:16px 20px;border-radius:20px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.8)}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:'+';font-size:20px;line-height:1;transition:transform .3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:10px;color:var(--ink2);font-size:14.5px}
+.sticky{position:sticky;top:96px}
+.two{display:grid;gap:22px}
+@media(min-width:960px){.two{grid-template-columns:1.6fr 1fr;align-items:start}}
+
+/* ---------- FOOTER / FLOAT ---------- */
+footer{padding:50px 0 120px}
+@media(min-width:900px){footer{padding-bottom:50px}}
+.wafab{position:fixed;right:16px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:49;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#1fa855,#2fd073);color:#fff;box-shadow:0 10px 26px rgba(31,168,85,.45);transition:transform .3s var(--ease)}
+.wafab:hover{transform:scale(1.08)}
+@media(min-width:900px){.wafab{bottom:24px;right:24px}}
+.toast{position:fixed;left:50%;top:84px;transform:translate3d(-50%,-20px,0);opacity:0;z-index:99;padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;transition:all .45s var(--ease);pointer-events:none;max-width:90vw}
+.toast.show{opacity:1;transform:translate3d(-50%,0,0)}
+
+/* ---------- ADMIN ---------- */
+.adm{display:grid;gap:18px}
+@media(min-width:900px){.adm{grid-template-columns:220px 1fr;align-items:start}}
+.side{padding:12px;display:flex;gap:6px;overflow-x:auto;flex-wrap:nowrap}
+@media(min-width:900px){.side{flex-direction:column;position:sticky;top:96px;overflow:visible}}
+.side button{padding:11px 16px;border-radius:16px;font-weight:700;font-size:14px;text-align:left;white-space:nowrap;transition:all .3s var(--ease);color:var(--ink2)}
+.side button.on{background:#fff;color:var(--brand);box-shadow:0 3px 10px rgba(0,0,0,.07)}
+.stat{padding:20px}
+.stat b{font-size:34px;display:block;letter-spacing:-.03em;line-height:1.1}
+.tbl{width:100%;border-collapse:separate;border-spacing:0 8px}
+.tbl th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2);text-align:left;padding:4px 14px}
+.tbl td{padding:12px 14px;background:rgba(255,255,255,.55);font-size:14px;vertical-align:middle}
+.tbl td:first-child{border-radius:16px 0 0 16px}.tbl td:last-child{border-radius:0 16px 16px 0}
+.tw{overflow-x:auto}
+.st{display:inline-block;padding:4px 11px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.st.new{background:#dfe6ff;color:#2a3b9a}.st.contacted{background:#fff0cc;color:#a56d00}.st.accepted{background:#d5f5e6;color:#0f7a4e}.st.rejected{background:#fde0e1;color:#b3262c}.st.completed{background:#e5e3f7;color:#4a3fa0}
+.modal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-end;justify-content:center;background:rgba(20,26,58,.35);padding:0}
+.modal.open{display:flex;animation:fade .3s both}
+@keyframes fade{from{opacity:0}}
+.modal .sheet{width:100%;max-width:720px;max-height:92vh;overflow:auto;padding:24px;border-radius:30px 30px 0 0;background:rgba(246,248,255,.92);animation:up .5s var(--ease) both;overscroll-behavior:contain}
+@media(min-width:760px){.modal{align-items:center;padding:20px}.modal .sheet{border-radius:30px}}
+@keyframes up{from{transform:translate3d(0,40px,0);opacity:0}}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:6px 14px;font-size:14px}
+.kv dt{color:var(--ink2);font-weight:600}
+.empty{padding:40px;text-align:center;color:var(--ink2)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+@media(max-width:700px){:root{--blur:14px}.orb{opacity:.55}}
 </style>
 </head>
 <body>
-<div class="mesh-bg"></div>
-<div class="noise"></div>
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
+<div class="bg"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 
-<!-- NAV - iOS 26 liquid pill style -->
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-[1120px]">
-  <div class="glass-pill rounded-[28px] px-5 md:px-7 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#1e2a5a] to-[#6a7dff] flex items-center justify-center text-white font-bold text-[14px] shadow-lg">M</div>
-      <div>
-        <div class="font-extrabold tracking-tight leading-none text-[15px]">MSV HOLIDAYS</div>
-        <div class="text-[10px] tracking-[0.18em] font-bold opacity-60 -mt-[1px]">TAMILNADU • LIQUID</div>
-      </div>
-    </div>
-    <div class="hidden md:flex items-center gap-7 text-[13.5px] font-medium">
-      <a href="#destinations" class="hover:opacity-60 transition">Destinations</a>
-      <a href="#packages" class="hover:opacity-60 transition">Packages</a>
-      <a href="#experiences" class="hover:opacity-60 transition">Experiences</a>
-      <a href="#" class="opacity-50">Journal</a>
-    </div>
-    <div class="flex items-center gap-2">
-      <button class="hidden md:inline-flex btn-glass-light text-[13px]">Enquire</button>
-      <button class="btn-glass text-[13px] px-5 py-[10px]">Book Trip →</button>
-    </div>
-  </div>
+<header class="nav"><div class="bar glass pill">
+  <a href="#/" class="logo"><i>M</i><div>MSV HOLIDAYS<small>MADURAI • TAMIL NADU</small></div></a>
+  <nav class="links" id="links">
+    <a href="#/" data-r="home">Home</a><a href="#/packages" data-r="packages">Packages</a><a href="#/fleet" data-r="fleet">Cabs</a><a href="#/reviews" data-r="reviews">Reviews</a><a href="#/contact" data-r="contact">Contact</a>
+  </nav>
+  <a href="#/enquiry" class="btn primary sm cta">Plan my trip →</a>
+</div></header>
+
+<main id="app"></main>
+
+<nav class="tabbar glass" id="tabbar">
+  <a href="#/" data-r="home"><span>🏠</span>Home</a>
+  <a href="#/packages" data-r="packages"><span>🧭</span>Packages</a>
+  <a href="#/enquiry" data-r="enquiry"><span>✍️</span>Enquire</a>
+  <a href="#/reviews" data-r="reviews"><span>⭐</span>Reviews</a>
+  <a href="#/contact" data-r="contact"><span>📞</span>Contact</a>
 </nav>
+<a class="wafab" id="wafab" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<div class="toast glass dark pill" id="toast"></div>
+<div class="modal" id="modal"><div class="sheet glass" data-lenis-prevent id="sheet"></div></div>
 
-<!-- HERO -->
-<section class="pt-[116px] pb-12 px-[5%] max-w-[1280px] mx-auto">
-  <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-start">
-    <!-- Left copy -->
-    <div class="relative">
-      <div class="inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 mb-6">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-[11px] font-bold tracking-widest uppercase">Android Canary 2605 • Liquid Glass Era</span>
-        <span class="tag bg-white/80 ml-1">New</span>
-      </div>
-      <h1 class="font-serif text-[46px] md:text-[68px] leading-[0.92] tracking-[-0.03em]">
-        Travel<br>
-        <span class="italic font-light">Tamil Nadu</span><br>
-        in liquid light.
-      </h1>
-      <p class="mt-6 text-[16.5px] leading-7 opacity-70 max-w-[46ch] font-[400]">
-        MSV Holidays crafts frosted-glass journeys — blur the noise, focus the moment. 
-        From misty Nilgiris to temple coasts, every itinerary is a translucent layer of memory.
-      </p>
-      
-      <!-- Search - Android 15 + iOS 26 inspired -->
-      <div class="mt-8 glass-card p-2 rounded-[28px] flex flex-wrap gap-2">
-        <div class="flex-1 min-w-[160px] glass rounded-[18px] px-4 py-3 flex items-center gap-3">
-          <span class="text-lg">📍</span>
-          <div><div class="text-[10px] font-bold tracking-widest uppercase opacity-50">Where</div><div class="text-[14px] font-semibold">Ooty, Kodaikanal, Madurai...</div></div>
-        </div>
-        <div class="flex-1 min-w-[120px] glass rounded-[18px] px-4 py-3 flex items-center gap-3">
-          <span class="text-lg">🗓️</span>
-          <div><div class="text-[10px] font-bold tracking-widest uppercase opacity-50">When</div><div class="text-[14px] font-semibold">Dec 12-18</div></div>
-        </div>
-        <div class="flex-1 min-w-[110px] glass rounded-[18px] px-4 py-3 flex items-center gap-3">
-          <span class="text-lg">👥</span>
-          <div><div class="text-[10px] font-bold tracking-widest uppercase opacity-50">Guests</div><div class="text-[14px] font-semibold">2 Adults</div></div>
-        </div>
-        <button class="btn-glass h-[56px] px-8 rounded-[18px] text-[14px]">Search</button>
-      </div>
-
-      <div class="mt-6 flex items-center gap-3">
-        <div class="flex -space-x-3">
-          <img src="https://i.pravatar.cc/100?img=32" class="w-8 h-8 rounded-full border-2 border-white">
-          <img src="https://i.pravatar.cc/100?img=14" class="w-8 h-8 rounded-full border-2 border-white">
-          <img src="https://i.pravatar.cc/100?img=47" class="w-8 h-8 rounded-full border-2 border-white">
-        </div>
-        <div class="text-[13px]"><span class="font-bold">4.9/5</span> <span class="opacity-60">from 2,847 glassy getaways</span></div>
-        <div class="ml-auto hidden md:flex items-center gap-2 glass rounded-full px-3 py-1.5">
-          <div class="w-5 h-5 rounded-full bg-black/10 grid place-items-center text-[10px]">✦</div>
-          <span class="text-[11px] font-semibold">Frosted Glass UI • Blur 32 • Sat 180</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right stack - Notes app style + Sales Report dark -->
-    <div class="relative lg:h-[720px]">
-      <!-- Main liquid card -->
-      <div class="glass-card p-3 rounded-[32px] shadow-[0_24px_80px_rgba(60,70,150,0.18)]">
-        <div class="rounded-[24px] overflow-hidden relative h-[420px] bg-gradient-to-br from-[#dfe9ff] to-[#ffe2ec]">
-          <img src="https://images.unsplash.com/photo-1583243536442-19f8dc8d0c6e?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60">
-          <div class="absolute inset-0 bg-gradient-to-t from-white/80 via-white/20 to-transparent"></div>
-          <!-- Floating file cards like your 1st image -->
-          <div class="absolute top-5 left-5 right-5 flex gap-3">
-            <div class="glass rounded-[14px] px-3 py-2 text-[11px] font-bold tracking-wide">All Notes</div>
-            <div class="bg-black text-white rounded-[14px] px-3 py-2 text-[11px] font-bold">To Do</div>
-            <div class="glass rounded-[14px] px-3 py-2 text-[11px] font-bold ml-auto">Images</div>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-3">
-            <div class="glass-card !rounded-[18px] p-3">
-              <div class="text-[11px] font-bold tracking-widest uppercase opacity-60">Shopping List</div>
-              <div class="mt-2 text-[13px] font-medium leading-5">☐ Temple pass<br>☐ Filter coffee<br>☐ Ghat drive</div>
-            </div>
-            <div class="glass-card !rounded-[18px] p-0 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?q=80&w=400&auto=format&fit=crop" class="w-full h-[96px] object-cover">
-              <div class="p-2.5 text-[11px] font-semibold">Thought of the day</div>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between p-3">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full overflow-hidden"><img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover"></div>
-            <div><div class="text-[12px] font-bold">Kodaikanal • Mist</div><div class="text-[11px] opacity-60">Today, 9:41 AM</div></div>
-          </div>
-          <div class="flex gap-2"><div class="w-9 h-9 glass rounded-full grid place-items-center">+</div><div class="w-9 h-9 glass rounded-full grid place-items-center">◐</div></div>
-        </div>
-      </div>
-
-      <!-- Sales Report floating dark glass - from your last image -->
-      <div class="absolute -bottom-6 -left-6 md:left-0 glass-dark rounded-[22px] p-4 w-[300px] text-white rotate-[-3deg] hover:rotate-0 transition duration-500">
-        <div class="text-[10px] tracking-widest font-bold opacity-70">SALES REPORT</div>
-        <div class="text-[32px] font-bold leading-none mt-1">$1,024 <span class="text-[13px] font-medium opacity-80">Net volume • 3.2% ↑</span></div>
-        <div class="mt-3 h-[56px] relative overflow-hidden rounded-[12px] bg-white/10">
-          <svg viewBox="0 0 200 60" class="w-full h-full"><path d="M0 45 C 20 40, 40 50, 60 30 S 100 10, 120 25 S 160 35, 200 15" fill="none" stroke="url(#g1)" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0%" stop-color="#6dff9e"/><stop offset="50%" stop-color="#7b6cff"/><stop offset="100%" stop-color="#ff6ec7"/></linearGradient></defs></svg>
-        </div>
-        <div class="mt-3 flex gap-2"><span class="tag bg-white/15">Accessories</span><span class="tag bg-white/15">Mac</span><span class="tag bg-white/10">iPhone</span></div>
-      </div>
-
-      <!-- Morning card -->
-      <div class="absolute -right-4 top-[40%] glass rounded-[20px] p-3 w-[200px] rotate-[4deg] hover:rotate-0 transition duration-500 hidden md:block">
-        <div class="text-[22px] font-serif leading-none">Good<br>Morning</div>
-        <div class="mt-3 rounded-[14px] overflow-hidden"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=300&auto=format&fit=crop" class="w-full h-[110px] object-cover"></div>
-        <div class="mt-3 glass rounded-[14px] p-2.5"><div class="text-[12px] font-bold">Monday<br>Jun 21</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DESTINATIONS - Liquid Glass grid -->
-<section id="destinations" class="px-[5%] max-w-[1280px] mx-auto mt-8">
-  <div class="flex items-end justify-between gap-6">
-    <div><div class="tag glass inline-flex mb-3">Frosted Destinations</div><h2 class="font-serif text-[38px] md:text-[52px] leading-[0.9]">Where light bends<br>around Tamil Nadu.</h2></div>
-    <div class="hidden md:block text-[14px] opacity-60 max-w-[28ch]">Inspired by Glassmorphism → Liquid Glass. Translucent layers that blur, refract, and create depth.</div>
-  </div>
-
-  <div class="grid md:grid-cols-12 gap-5 mt-8 auto-rows-[280px]">
-    <!-- Ooty large -->
-    <div class="md:col-span-7 glass-card group p-0 overflow-hidden cursor-pointer">
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-[1.2s]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-white/20"></div>
-      <div class="absolute top-5 left-5 flex gap-2"><span class="tag bg-white text-black">Nilgiris • 2,240m</span><span class="tag glass-dark text-white">Blur 28px</span></div>
-      <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-        <div class="flex items-end justify-between"><h3 class="font-serif text-[36px] leading-none">Ooty<br><span class="italic font-light opacity-90">Queen of Hills</span></h3><div class="glass rounded-full px-4 py-2 text-[12px] font-bold text-white">From ₹8,499 →</div></div>
-      </div>
-    </div>
-    <!-- Madurai -->
-    <div class="md:col-span-5 glass-card p-0 overflow-hidden group cursor-pointer">
-      <img src="https://images.unsplash.com/photo-1583422409517-716faa24672d?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-[1.2s]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-      <div class="absolute top-4 left-4 glass rounded-full px-3 py-1 text-[11px] font-bold">Meenakshi Temple • Heritage</div>
-      <div class="absolute bottom-5 left-5 text-white"><div class="text-[28px] font-serif leading-none">Madurai</div><div class="text-[12px] opacity-80 mt-1">Athens of the East • Night ceremonies</div></div>
-    </div>
-    <!-- Kodaikanal -->
-    <div class="md:col-span-4 glass-card p-0 overflow-hidden group cursor-pointer">
-      <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-white/10"></div>
-      <div class="absolute top-4 left-4 right-4 flex justify-between"><span class="tag bg-white">Lake & Forest</span><span class="w-8 h-8 glass rounded-full grid place-items-center">♡</span></div>
-      <div class="absolute bottom-4 left-4 right-4 glass rounded-[16px] p-3 flex items-center justify-between"><div><div class="font-bold text-[15px]">Kodaikanal</div><div class="text-[11px] opacity-70">Princess of Hill Stations</div></div><div class="btn-glass-light text-[12px] px-3 py-1.5">Explore</div></div>
-    </div>
-    <!-- Rameswaram - liquid shape -->
-    <div class="md:col-span-4 liquid-shape p-5 !rounded-[32px] relative overflow-hidden group cursor-pointer min-h-[280px] flex flex-col justify-between">
-      <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition">
-      <div class="relative z-10"><div class="tag bg-black text-white">Pamban Bridge • Sea</div><h3 class="font-serif text-[30px] leading-[0.9] mt-16 text-white drop-shadow">Rameswaram<br><span class="italic">island pulse</span></h3></div>
-      <div class="relative z-10 glass rounded-[14px] p-3 flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-white grid place-items-center">→</div><div class="text-[13px] font-semibold">Dhanushkodi ghost town<br><span class="text-[11px] opacity-70">Glass kayak at sunrise</span></div></div>
-    </div>
-    <!-- Kanyakumari -->
-    <div class="md:col-span-4 glass-card p-0 overflow-hidden group cursor-pointer">
-      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#ff8fab]/60 via-transparent to-transparent"></div>
-      <div class="absolute bottom-4 left-4 right-4"><div class="glass-dark text-white rounded-[18px] p-4"><div class="flex justify-between"><div class="font-serif text-[22px] leading-none">Kanyakumari</div><div class="text-[11px] tag bg-white/20">3 Seas</div></div><div class="mt-2 text-[12px] opacity-80">Where Bay of Bengal, Arabian Sea & Indian Ocean meet.</div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCES - iOS call + Android QS inspiration -->
-<section id="experiences" class="px-[5%] max-w-[1280px] mx-auto mt-20">
-  <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
-    <div class="glass-card p-7 rounded-[36px]">
-      <div class="flex items-center justify-between mb-6">
-        <h3 class="font-serif text-[28px]">System UI Upgrades</h3>
-        <span class="tag glass">iOS 26 • Android 2605</span>
-      </div>
-      <div class="space-y-3">
-        <div class="glass rounded-[18px] p-4 flex items-center justify-between">
-          <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8f0ff] grid place-items-center">✈️</div><div><div class="font-semibold text-[14px]">Unified Call History</div><div class="text-[12px] opacity-60">Flights + cabs + guides in one timeline</div></div></div><div class="w-8 h-8 glass rounded-full grid place-items-center">›</div>
-        </div>
-        <div class="glass rounded-[18px] p-4 flex items-center justify-between">
-          <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#ffe8f0] grid place-items-center">🌫️</div><div><div class="font-semibold text-[14px]">Frosted Glass UI</div><div class="text-[12px] opacity-60">Backdrop blur 32px • Saturation 180%</div></div></div><div class="flex items-center gap-2"><div class="w-12 h-[6px] rounded-full bg-black/10"><div class="w-[70%] h-full bg-black rounded-full"></div></div><span class="text-[12px]">›</span></div>
-        </div>
-        <div class="glass rounded-[18px] p-4 flex items-center justify-between">
-          <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8ffe8] grid place-items-center">🔒</div><div><div class="font-semibold text-[14px]">More Customization</div><div class="text-[12px] opacity-60">Liquid tint, depth, and border control</div></div></div><div class="w-8 h-8 glass rounded-full grid place-items-center">⚙️</div>
-        </div>
-      </div>
-      <div class="mt-6 grid grid-cols-2 gap-3">
-        <div class="glass rounded-[16px] p-4 text-center"><div class="text-[22px] font-bold">Blur Effects</div><div class="text-[11px] opacity-60 uppercase tracking-widest font-bold">Smart Layering</div></div>
-        <div class="glass rounded-[16px] p-4 text-center"><div class="text-[22px] font-bold">Smarter Calling</div><div class="text-[11px] opacity-60 uppercase tracking-widest font-bold">One Tap Connect</div></div>
-      </div>
-    </div>
-
-    <div>
-      <div class="tag glass inline-flex mb-4">Material Aesthetics • Side-by-side</div>
-      <h2 class="font-serif text-[42px] leading-[0.9] tracking-[-0.02em]">From glassmorphism<br>to <span class="italic">liquid glass.</span></h2>
-      <p class="mt-4 opacity-70 leading-7">Your old site was flat. We refracted it. Glassmorphism was translucent layers that blur and refract background, creating depth. Liquid Glass is fluid, organic surfaces that bend light and color, reacting to the world behind them — exactly what Tamil Nadu feels like at 6AM.</p>
-      
-      <div class="mt-8 grid grid-cols-3 gap-4">
-        <div class="glass-card !rounded-[20px] p-5"><div class="text-[11px] font-bold tracking-widest uppercase opacity-50">Glassmorphism</div><div class="mt-3 text-[13px] leading-5 opacity-80">Translucent layers that blur and refract background, creating depth and focus.</div><div class="mt-4 w-8 h-8 glass rounded-full grid place-items-center text-[12px]">→</div></div>
-        <div class="glass rounded-[20px] p-5 border-dashed"><div class="text-[11px] font-bold tracking-widest uppercase opacity-50">Neumorphism</div><div class="mt-3 text-[13px] opacity-60">Soft extruded plastic. We skipped it.</div><div class="mt-6 text-[11px] opacity-40">Not for travel</div></div>
-        <div class="liquid-shape !rounded-[24px] p-5"><div class="text-[11px] font-bold tracking-widest uppercase">Liquid Glass</div><div class="mt-3 text-[13px] leading-5">Fluid, organic surfaces that bend light and color, reacting to world behind them.</div><div class="mt-4 w-8 h-8 bg-white rounded-full grid place-items-center">→</div></div>
-      </div>
-
-      <div class="mt-8 glass-dark text-white rounded-[24px] p-5 flex items-center gap-4">
-        <div class="w-14 h-14 rounded-full overflow-hidden"><img src="https://images.unsplash.com/photo-1603262110263-fb3a02f3f39d?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover"></div>
-        <div><div class="font-semibold">Hold This Trip?</div><div class="text-[12px] opacity-70">You'll be notified to pick up when fares drop.</div></div>
-        <button class="ml-auto glass rounded-full px-4 py-2 text-[12px] font-bold">Hold</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PACKAGES -->
-<section id="packages" class="px-[5%] max-w-[1280px] mx-auto mt-24">
-  <div class="flex items-end justify-between">
-    <h2 class="font-serif text-[40px] leading-none">Curated<br><span class="italic">glass routes</span></h2>
-    <div class="hidden md:flex gap-2"><button class="w-10 h-10 glass rounded-full grid place-items-center">←</button><button class="w-10 h-10 glass-pill rounded-full grid place-items-center">→</button></div>
-  </div>
-  <div class="mt-8 grid md:grid-cols-3 gap-6">
-    <div class="glass-card p-3 rounded-[28px] group cursor-pointer">
-      <div class="h-[220px] rounded-[20px] overflow-hidden relative"><img src="https://images.unsplash.com/photo-1526772661823-3f88f33771cd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"><div class="absolute top-3 left-3 tag bg-white">3N / 4D • Best Seller</div><div class="absolute bottom-3 left-3 right-3 glass rounded-[14px] p-2.5 flex justify-between text-[12px] font-semibold"><span>☁️ 19°C mist</span><span>⭐ 4.9</span></div></div>
-      <div class="p-4"><h3 class="font-bold text-[18px]">Nilgiri Glass Trail</h3><p class="text-[13px] opacity-60 mt-1 leading-5">Ooty • Coonoor toy train • Avalanche lake glass kayak</p><div class="mt-4 flex items-center justify-between"><div class="text-[20px] font-bold">₹12,499 <span class="text-[12px] opacity-50 font-medium">/ person</span></div><div class="btn-glass-light text-[12px]">Book</div></div></div>
-    </div>
-    <div class="glass-card p-3 rounded-[28px] group cursor-pointer">
-      <div class="h-[220px] rounded-[20px] overflow-hidden relative"><img src="https://images.unsplash.com/photo-1596178312682-3e6f4e8e86de?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"><div class="absolute top-3 left-3 tag bg-black text-white">Temple • Culture</div></div>
-      <div class="p-4"><h3 class="font-bold text-[18px]">Temple Coast Blur</h3><p class="text-[13px] opacity-60 mt-1 leading-5">Madurai • Rameswaram • Kanyakumari sunrise glass boat</p><div class="mt-4 flex items-center justify-between"><div class="text-[20px] font-bold">₹14,999 <span class="text-[12px] opacity-50 font-medium">/ person</span></div><div class="btn-glass-light text-[12px]">Book</div></div></div>
-    </div>
-    <div class="glass-card p-3 rounded-[28px] group cursor-pointer">
-      <div class="h-[220px] rounded-[20px] overflow-hidden relative"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"><div class="absolute top-3 left-3 tag glass-dark text-white">Luxury • Liquid</div></div>
-      <div class="p-4"><h3 class="font-bold text-[18px]">Kodaikanal Cloud Glass</h3><p class="text-[13px] opacity-60 mt-1 leading-5">Private villa • Berijam forest • Starlit glass dining</p><div class="mt-4 flex items-center justify-between"><div class="text-[20px] font-bold">₹18,499 <span class="text-[12px] opacity-50 font-medium">/ person</span></div><div class="btn-glass-light text-[12px]">Book</div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER GLASS -->
-<footer class="mt-24 px-[5%] pb-10">
-  <div class="max-w-[1280px] mx-auto glass-card rounded-[32px] p-8 md:p-12 relative overflow-hidden">
-    <div class="grid md:grid-cols-[1.2fr_.8fr_.8fr_.8fr] gap-10">
-      <div>
-        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e2a5a] to-[#6a7dff] grid place-items-center text-white font-bold">M</div><div class="font-extrabold">MSV HOLIDAYS</div></div>
-        <p class="mt-4 text-[13px] leading-6 opacity-60 max-w-[28ch]">We don't sell trips. We sell refraction — where your world blurs and Tamil Nadu comes into focus. Liquid Glass travel, made in Madurai.</p>
-        <div class="mt-6 flex gap-2"><span class="tag glass">Blur 32</span><span class="tag glass">Sat 180</span><span class="tag glass">Refraction</span></div>
-      </div>
-      <div><div class="font-bold text-[12px] tracking-widest uppercase opacity-50 mb-4">Destinations</div><div class="space-y-2 text-[14px]"><div>Ooty Glass Trail</div><div>Kodaikanal Cloud</div><div>Madurai Temple</div><div>Rameswaram Liquid</div></div></div>
-      <div><div class="font-bold text-[12px] tracking-widest uppercase opacity-50 mb-4">System</div><div class="space-y-2 text-[14px]"><div>Frosted UI Kit</div><div>Volume & Power Menu</div><div>Calls & Unified History</div><div>More Blur.</div></div></div>
-      <div class="glass rounded-[20px] p-5"><div class="font-bold">Get liquid updates</div><div class="text-[12px] opacity-60 mt-1">Blur, smarter calling, new features.</div><div class="mt-4 flex gap-2"><input placeholder="you@mail.com" class="flex-1 glass rounded-full px-4 py-2.5 text-[13px] outline-none bg-white/60"><button class="btn-glass text-[13px] px-5 py-2.5">→</button></div></div>
-    </div>
-    <div class="mt-10 pt-6 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12px] opacity-60"><div>© 2026 MSV Holidays • Built for Cloudflare Pages • Single-file deploy</div><div class="flex gap-4"><span>Instagram</span><span>Privacy • Glass Policy</span><span>Made in Madurai</span></div></div>
-  </div>
-</footer>
-
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script>
-// subtle parallax for blobs
-document.addEventListener('mousemove', (e)=>{
-  const x = (e.clientX / window.innerWidth - 0.5) * 20;
-  const y = (e.clientY / window.innerHeight - 0.5) * 20;
-  document.querySelectorAll('.blob').forEach((b,i)=>{
-    const factor = (i+1)*0.6;
-    b.style.transform = `translate(${x*factor}px, ${y*factor}px) scale(1)`;
-  });
+(function(){
+'use strict';
+/* ================= helpers ================= */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const inr=n=>'₹'+Number(n||0).toLocaleString('en-IN');
+const mem={};
+const store={
+  get(k,d){try{const v=localStorage.getItem('msv_'+k);return v?JSON.parse(v):(k in mem?mem[k]:d)}catch(e){return k in mem?mem[k]:d}},
+  set(k,v){mem[k]=v;try{localStorage.setItem('msv_'+k,JSON.stringify(v))}catch(e){}}
+};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const today=()=>new Date().toISOString().slice(0,10);
+const fmtD=d=>{try{return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d||'—'}};
+const lines=t=>String(t||'').split('\n').map(s=>s.trim()).filter(Boolean);
+
+/* ================= seed data (DEMO) ================= */
+const VEHICLES=[
+  {id:'dzire',name:'Sedan',ex:'Dzire / Etios',seats:4,rate:12,icon:'🚗'},
+  {id:'ertiga',name:'Ertiga',ex:'MPV • AC',seats:6,rate:15,icon:'🚙'},
+  {id:'innova',name:'Innova Crysta',ex:'Premium SUV',seats:7,rate:19,icon:'🚐'},
+  {id:'tempo',name:'Tempo Traveller',ex:'12 / 17 seats',seats:12,rate:26,icon:'🚌'},
+  {id:'bus',name:'Mini Bus',ex:'25 seats',seats:25,rate:38,icon:'🚍'}
+];
+const CATS=['Hill Station','Temple','Beach','Family','Honeymoon','Wildlife'];
+const SEED_PK=[
+ {id:'p1',title:'Ooty & Coonoor Misty Escape',dest:'Ooty',category:'Hill Station',days:4,price:9499,hue:160,emoji:'🍃',featured:true,active:true,rating:4.8,
+  highlights:['Botanical Garden & Rose Garden','Doddabetta Peak','Nilgiri toy train ride (Coonoor)','Tea factory visit'],
+  itinerary:['Arrival & Ooty Lake | Pickup, check-in, boating at Ooty Lake, evening chocolate market.','Ooty Sightseeing | Botanical Garden, Rose Garden, Doddabetta Peak, tea factory.','Coonoor Day | Sim\'s Park, Dolphin\'s Nose, Lamb\'s Rock, Nilgiri toy train.','Departure | Breakfast, drop at station / airport.'],
+  inc:['AC cab with driver','Fuel, toll, parking, driver bata','3 nights hotel on twin sharing','Daily breakfast'],exc:['Entry tickets','Lunch & dinner','Personal expenses','Camera fees']},
+ {id:'p2',title:'Kodaikanal Cloud Trail',dest:'Kodaikanal',category:'Hill Station',days:3,price:7999,hue:215,emoji:'🌫️',featured:true,active:true,rating:4.9,
+  highlights:['Kodaikanal Lake boating','Pillar Rocks & Guna Caves','Pine Forest & Coaker\'s Walk','Silver Cascade Falls'],
+  itinerary:['Madurai to Kodai | Pickup, scenic drive, lake boating, Bryant Park.','Kodai Sightseeing | Pillar Rocks, Guna Caves, Pine Forest, Coaker\'s Walk.','Return | Silver Cascade, drop back at Madurai.'],
+  inc:['AC cab with driver','Fuel, toll, parking','2 nights hotel','Breakfast'],exc:['Entry tickets','Lunch & dinner','Boating charges']},
+ {id:'p3',title:'Meenakshi & Temple Circuit',dest:'Madurai',category:'Temple',days:3,price:6499,hue:25,emoji:'🛕',featured:true,active:true,rating:4.8,
+  highlights:['Meenakshi Amman Temple','Thirumalai Nayakar Mahal','Gandhi Memorial Museum','Alagar Koil & Pazhamudhircholai'],
+  itinerary:['Madurai Temple Day | Meenakshi Amman darshan, Nayakar Mahal, evening ceremony.','Around Madurai | Gandhi Museum, Alagar Koil, Thiruparankundram.','Departure | Local shopping, drop.'],
+  inc:['AC cab with driver','Fuel, toll, driver bata','2 nights hotel near temple','Breakfast'],exc:['Special darshan tickets','Meals','Personal expenses']},
+ {id:'p4',title:'Rameswaram & Dhanushkodi',dest:'Rameswaram',category:'Temple',days:3,price:8999,hue:195,emoji:'🌊',featured:false,active:true,rating:4.7,
+  highlights:['Ramanathaswamy Temple & 22 theerthams','Pamban Bridge','Dhanushkodi ghost town','Kalam Memorial'],
+  itinerary:['Madurai to Rameswaram | Drive via Pamban Bridge, temple darshan.','Dhanushkodi | Sunrise, Arichal Munai, Kalam Memorial.','Return | Drop at Madurai.'],
+  inc:['AC cab with driver','Fuel, toll, parking','2 nights hotel','Breakfast'],exc:['Temple special entry','Lunch & dinner']},
+ {id:'p5',title:'Kanyakumari Sunrise Coast',dest:'Kanyakumari',category:'Beach',days:4,price:10999,hue:345,emoji:'🌅',featured:true,active:true,rating:4.8,
+  highlights:['Sunrise & sunset point','Vivekananda Rock & Thiruvalluvar Statue','Padmanabhapuram Palace','Suchindram Temple'],
+  itinerary:['Arrival | Drive from Madurai, sunset point.','Kanyakumari | Sunrise, Vivekananda Rock, Thiruvalluvar Statue.','Around | Padmanabhapuram Palace, Suchindram, Thirparappu Falls.','Return | Breakfast, drop.'],
+  inc:['AC cab with driver','Fuel, toll, driver bata','3 nights hotel','Breakfast'],exc:['Ferry tickets','Lunch & dinner']},
+ {id:'p6',title:'Best of Tamil Nadu 6D',dest:'Multi-city',category:'Family',days:6,price:16999,hue:265,emoji:'🗺️',featured:true,active:true,rating:4.9,
+  highlights:['Ooty • Kodaikanal • Madurai','Rameswaram • Kanyakumari','Family-friendly pace','Hand-picked stays'],
+  itinerary:['Ooty | Lakes, gardens, tea estates.','Ooty to Kodaikanal | Scenic drive, lake evening.','Kodaikanal | Pillar Rocks, Pine Forest.','Madurai | Meenakshi Temple, Nayakar Mahal.','Rameswaram | Temple, Dhanushkodi.','Kanyakumari | Sunrise, drop.'],
+  inc:['AC cab with driver','Fuel, toll, parking','5 nights hotel','Breakfast daily'],exc:['Entry fees','Lunch & dinner','Flights / trains']},
+ {id:'p7',title:'Romantic Hills Honeymoon',dest:'Kodaikanal',category:'Honeymoon',days:4,price:15499,hue:330,emoji:'💞',featured:false,active:true,rating:4.9,
+  highlights:['Private villa stay','Candle-light dinner','Berijam Lake permit trip','Flower decoration on arrival'],
+  itinerary:['Arrival | Villa check-in, flower decoration.','Lake & Rocks | Boating, Pillar Rocks, candle-light dinner.','Berijam | Forest drive (permit), photography.','Departure | Slow breakfast, drop.'],
+  inc:['AC cab with driver','3 nights villa','Breakfast & 1 candle-light dinner','Cake & decoration'],exc:['Entry fees','Other meals']},
+ {id:'p8',title:'Theni & Kurangani Wild Trails',dest:'Theni',category:'Wildlife',days:3,price:7499,hue:130,emoji:'🐘',featured:false,active:true,rating:4.6,
+  highlights:['Suruli Falls','Kurangani viewpoint','Megamalai tea estates','Vaigai Dam'],
+  itinerary:['Madurai to Megamalai | Tea estate drive, viewpoints.','Suruli & Kumbakarai | Falls and forest walk.','Return | Vaigai Dam, drop.'],
+  inc:['AC cab with driver','Fuel & toll','2 nights stay','Breakfast'],exc:['Forest entry','Trek guide','Meals']}
+];
+const SEED_RV=[
+ {id:'r1',name:'Karthik S.',trip:'Ooty Misty Escape',rating:5,text:'Driver was polite and knew every viewpoint. Hotel was clean and the plan was perfect for our family.',date:'2026-08-14',ok:true},
+ {id:'r2',name:'Divya & Arun',trip:'Kodaikanal Honeymoon',rating:5,text:'Villa decoration was a lovely surprise. Everything was on time and smooth.',date:'2026-07-02',ok:true},
+ {id:'r3',name:'Mohamed Rafi',trip:'Rameswaram Tour',rating:4,text:'Good value. Pamban Bridge sunrise was unforgettable. Quoted price matched final bill.',date:'2026-06-21',ok:true},
+ {id:'r4',name:'Lakshmi N.',trip:'Temple Circuit',rating:5,text:'Elders in our group were comfortable throughout. Booked in minutes over WhatsApp.',date:'2026-05-30',ok:true}
+];
+const SEED_EQ=[
+ {id:'e1',ref:'MSV-1001',type:'package',name:'Suresh Kumar',phone:'9876500001',email:'suresh@example.com',pkg:'p1',dest:'Ooty',pickup:'Chennai',drop:'Ooty',date:'2026-11-10',ret:'2026-11-14',flex:true,adults:2,kids:1,vehicle:'ertiga',hotel:'Standard',meal:'Breakfast',budget:'25000',msg:'Need baby seat.',status:'new',note:'',quote:'',created:'2026-10-10T09:20:00'},
+ {id:'e2',ref:'MSV-1002',type:'cab',name:'Anitha R.',phone:'9876500002',email:'',pkg:'',dest:'Kodaikanal',pickup:'Madurai Airport',drop:'Kodaikanal',date:'2026-10-20',ret:'',flex:false,adults:4,kids:0,vehicle:'innova',hotel:'',meal:'',budget:'',msg:'One-way drop.',status:'contacted',note:'Called, confirming time.',quote:'4800',created:'2026-10-09T16:05:00'}
+];
+const SEED_SET={phone:'+91 90000 00000',wa:'919000000000',email:'hello@msvholidays.example',addr:'Madurai, Tamil Nadu, India',hours:'Daily 6:00 AM – 10:00 PM'};
+
+function seed(){
+  if(!store.get('seeded',0)){
+    store.set('packages',SEED_PK);store.set('reviews',SEED_RV);store.set('enq',SEED_EQ);store.set('settings',SEED_SET);store.set('seeded',1);
+  }
+}
+const DB={
+  pk:()=>store.get('packages',SEED_PK),savePk:v=>store.set('packages',v),
+  rv:()=>store.get('reviews',SEED_RV),saveRv:v=>store.set('reviews',v),
+  eq:()=>store.get('enq',SEED_EQ),saveEq:v=>store.set('enq',v),
+  set:()=>Object.assign({},SEED_SET,store.get('settings',{})),saveSet:v=>store.set('settings',v)
+};
+
+/* ================= UI utils ================= */
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600)}
+function openModal(html){const m=$('#modal');$('#sheet').innerHTML=html;m.classList.add('open');document.documentElement.style.overflow='hidden';if(lenis)lenis.stop()}
+function closeModal(){$('#modal').classList.remove('open');document.documentElement.style.overflow='';if(lenis)lenis.start()}
+$('#modal').addEventListener('mousedown',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+function art(p,cls){
+  const bg=p.img?`background-image:url('${esc(p.img)}')`:`background:linear-gradient(140deg,hsl(${p.hue||220} 80% 78%),hsl(${((p.hue||220)+50)%360} 85% 66%))`;
+  return `<div class="art ${cls||''}" style="${bg}">${p.img?'':`<span style="filter:drop-shadow(0 8px 14px rgba(0,0,0,.25))">${p.emoji||'🧳'}</span>`}`;
+}
+const stars=n=>'<span class="stars">'+'★'.repeat(Math.round(n))+'<span style="opacity:.25">'+'★'.repeat(5-Math.round(n))+'</span></span>';
+const waLink=(txt)=>{const s=DB.set();return `https://wa.me/${String(s.wa).replace(/\D/g,'')}?text=${encodeURIComponent(txt)}`};
+
+function pkgCard(p){
+  return `<article class="glass hover pcard rv" data-go="#/package/${p.id}">
+    ${art(p)}<div class="badges"><span class="tag">${esc(p.category)}</span>${p.featured?'<span class="tag" style="background:#243489;color:#fff">Best seller</span>':''}</div></div>
+    <div class="pbody"><div class="muted" style="font-size:12.5px;font-weight:600">📍 ${esc(p.dest)} • ${p.days}D / ${Math.max(p.days-1,0)}N</div>
+    <h3>${esc(p.title)}</h3><div style="font-size:13px">${stars(p.rating||4.5)} <span class="muted">${esc(p.rating||'')}</span></div>
+    <div class="pfoot"><div class="price">${inr(p.price)}<small> / person</small></div><span class="btn light sm">View →</span></div></div></article>`;
+}
+function reviewCard(r){
+  return `<article class="glass pcard rv" style="cursor:default;padding:22px;gap:10px"><div>${stars(r.rating)}</div>
+  <p style="font-size:15px">“${esc(r.text)}”</p><div style="margin-top:auto;display:flex;justify-content:space-between;gap:8px;font-size:13px"><b>${esc(r.name)}</b><span class="muted">${esc(r.trip)}</span></div></article>`;
+}
+
+/* ================= VIEWS ================= */
+const V={};
+
+V.home=()=>{
+  const pk=DB.pk().filter(p=>p.active);const feat=pk.filter(p=>p.featured).slice(0,3);
+  const rvs=DB.rv().filter(r=>r.ok).slice(0,3);
+  const dests=[...new Set(pk.map(p=>p.dest))];
+  return `<div class="view">
+  <section class="hero"><div class="wrap split">
+    <div>
+      <span class="tag glass pill" style="display:inline-flex;gap:8px;align-items:center;padding:7px 14px"><i style="width:8px;height:8px;border-radius:50%;background:var(--ok)"></i>Tours • Cabs • Custom trips</span>
+      <h1 class="serif" style="margin-top:18px">See Tamil Nadu<br><em>in liquid light.</em></h1>
+      <p class="lead">Temples, hill stations and coastlines — planned by a Madurai team, driven by verified local drivers, quoted clearly.</p>
+      <form class="search glass" id="qs">
+        <label class="field"><span>Where</span><select class="in" name="dest"><option value="">Anywhere in TN</option>${dests.map(d=>`<option>${esc(d)}</option>`).join('')}</select></label>
+        <label class="field"><span>When</span><input class="in" type="date" name="date" min="${today()}"></label>
+        <label class="field"><span>Guests</span><select class="in" name="adults">${[1,2,3,4,5,6,8,10,15].map(n=>`<option value="${n}" ${n===2?'selected':''}>${n}</option>`).join('')}</select></label>
+        <button class="btn primary" style="height:52px;padding:0 28px">Get quote</button>
+      </form>
+      <div class="stats"><div><b>2,800+</b><small>Happy travellers</small></div><div><b>4.8★</b><small>Average rating</small></div><div><b>1 hr</b><small>Typical reply</small></div></div>
+    </div>
+    <div class="glass heroart" style="background:linear-gradient(140deg,hsl(215 85% 80%),hsl(300 80% 80%))">
+      <div style="font-size:120px;filter:drop-shadow(0 20px 30px rgba(30,40,120,.35))">🏔️</div>
+      <div class="glass float" style="left:6%;top:10%">🛕 Madurai</div>
+      <div class="glass dark float" style="right:6%;top:30%;animation-delay:-2s">🍃 Ooty 19°C</div>
+      <div class="glass float" style="left:12%;bottom:12%;animation-delay:-4s">🌅 Kanyakumari</div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap"><div class="sec-h"><div><span class="tag glass">Destinations</span><h2 class="serif" style="margin-top:12px">Where light bends<br>around Tamil Nadu.</h2></div><a class="btn light" href="#/packages">All packages</a></div>
+    <div class="grid g4">${dests.slice(0,8).map(d=>{const p=pk.find(x=>x.dest===d);return `<div class="glass hover dest rv" data-go="#/packages?dest=${encodeURIComponent(d)}">${art(p)}</div><div class="cap glass dark"><span>${esc(d)}</span><span>→</span></div></div>`}).join('')}</div></div></section>
+
+  <section><div class="wrap"><div class="sec-h"><div><span class="tag glass">Featured</span><h2 class="serif" style="margin-top:12px">Curated glass routes</h2></div><a class="btn light" href="#/packages">View all →</a></div>
+    <div class="grid g3">${feat.map(pkgCard).join('')}</div></div></section>
+
+  <section><div class="wrap"><div class="grid g4">
+    ${[['🚗','Verified drivers','Background-checked, local, polite.'],['🧾','Clear quotes','Fuel, toll, driver bata listed upfront.'],['💬','WhatsApp support','Real person replies, trip-day help.'],['🛠️','Fully custom','Change days, hotels, vehicle any time.']].map(x=>`<div class="glass hover rv" style="padding:24px"><div class="icon">${x[0]}</div><h3 style="margin:14px 0 6px;font-size:17px">${x[1]}</h3><p class="muted" style="font-size:14px">${x[2]}</p></div>`).join('')}
+  </div></div></section>
+
+  <section><div class="wrap"><div class="sec-h"><div><span class="tag glass">Fleet</span><h2 class="serif" style="margin-top:12px">Pick your ride.</h2></div><a class="btn light" href="#/fleet">Rates →</a></div>
+    <div class="grid g4">${VEHICLES.slice(0,4).map(v=>`<div class="glass hover rv" style="padding:22px"><div style="font-size:40px">${v.icon}</div><h3 style="margin-top:8px">${v.name}</h3><p class="muted" style="font-size:13px">${v.ex} • ${v.seats} seats</p><div class="price" style="margin-top:10px">${inr(v.rate)}<small> / km</small></div></div>`).join('')}</div></div></section>
+
+  <section><div class="wrap"><div class="sec-h"><div><span class="tag glass">Reviews</span><h2 class="serif" style="margin-top:12px">Loved on the road.</h2></div><a class="btn light" href="#/reviews">All reviews</a></div>
+    <div class="grid g3">${rvs.map(reviewCard).join('')}</div></div></section>
+
+  <section><div class="wrap"><div class="glass dark rv" style="padding:clamp(28px,5vw,56px);text-align:center"><h2 class="serif">Tell us the dates.<br><em>We’ll shape the trip.</em></h2><p style="opacity:.8;margin:14px auto 24px;max-width:46ch">Share pickup, dates and group size. Get a quote on WhatsApp.</p><a class="btn light" href="#/enquiry">Start enquiry →</a></div></div></section>
+  </div>`;
+};
+
+V.packages=(q)=>{
+  const all=DB.pk().filter(p=>p.active);
+  const f={cat:q.cat||'',dest:q.dest||'',dur:q.dur||'',sort:q.sort||'pop',s:q.s||''};
+  let list=all.filter(p=>(!f.cat||p.category===f.cat)&&(!f.dest||p.dest===f.dest)&&(!f.s||(p.title+p.dest).toLowerCase().includes(f.s.toLowerCase()))&&(!f.dur||(f.dur==='short'?p.days<=3:f.dur==='mid'?p.days===4||p.days===5:p.days>=6)));
+  if(f.sort==='low')list.sort((a,b)=>a.price-b.price);else if(f.sort==='high')list.sort((a,b)=>b.price-a.price);else list.sort((a,b)=>(b.featured-a.featured)||(b.rating-a.rating));
+  const dests=[...new Set(all.map(p=>p.dest))];
+  return `<div class="view"><section><div class="wrap">
+    <span class="tag glass">${list.length} packages</span><h2 class="serif" style="margin:12px 0 22px">Tour packages</h2>
+    <div class="glass" style="padding:14px;margin-bottom:22px"><div class="fgrid" id="flt">
+      <label class="field"><span>Search</span><input class="in" name="s" value="${esc(f.s)}" placeholder="Ooty, temple…"></label>
+      <label class="field"><span>Destination</span><select class="in" name="dest"><option value="">All</option>${dests.map(d=>`<option ${d===f.dest?'selected':''}>${esc(d)}</option>`).join('')}</select></label>
+      <label class="field"><span>Duration</span><select class="in" name="dur"><option value="">Any</option><option value="short" ${f.dur==='short'?'selected':''}>Up to 3 days</option><option value="mid" ${f.dur==='mid'?'selected':''}>4–5 days</option><option value="long" ${f.dur==='long'?'selected':''}>6+ days</option></select></label>
+      <label class="field"><span>Sort</span><select class="in" name="sort"><option value="pop">Popular</option><option value="low" ${f.sort==='low'?'selected':''}>Price low → high</option><option value="high" ${f.sort==='high'?'selected':''}>Price high → low</option></select></label>
+    </div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+      <button class="chip ${!f.cat?'on':''}" data-cat="">All</button>${CATS.map(c=>`<button class="chip ${f.cat===c?'on':''}" data-cat="${c}">${c}</button>`).join('')}</div></div>
+    ${list.length?`<div class="grid g3">${list.map(pkgCard).join('')}</div>`:`<div class="glass empty">No packages match. <a href="#/enquiry" style="color:var(--brand);font-weight:700">Ask for a custom trip →</a></div>`}
+  </div></section></div>`;
+};
+
+V.package=(id)=>{
+  const p=DB.pk().find(x=>x.id===id);
+  if(!p)return `<div class="view wrap"><div class="glass empty" style="margin-top:30px">Package not found. <a href="#/packages" style="color:var(--brand)">Back</a></div></div>`;
+  const it=(p.itinerary||[]).map((l,i)=>{const [t,...d]=l.split('|');return `<div class="day"><b class="n">D${i+1}</b><div><b>${esc(t.trim())}</b><p class="muted" style="font-size:14.5px">${esc(d.join('|').trim())}</p></div></div>`}).join('');
+  return `<div class="view"><section><div class="wrap">
+    <a href="#/packages" class="muted" style="font-weight:600;font-size:14px">← All packages</a>
+    <div class="glass" style="padding:10px;margin:14px 0 22px">${art(p,'')}</div></div>
+    <div class="two">
+      <div style="display:grid;gap:20px">
+        <div class="glass" style="padding:26px"><span class="tag" style="background:#fff">${esc(p.category)}</span><h1 class="serif" style="font-size:clamp(34px,5vw,52px);line-height:1;margin:12px 0">${esc(p.title)}</h1>
+          <p class="muted">📍 ${esc(p.dest)} • ${p.days} days / ${Math.max(p.days-1,0)} nights • ${stars(p.rating||4.5)} ${esc(p.rating||'')}</p></div>
+        <div class="glass" style="padding:26px"><h3>Highlights</h3><ul class="tick" style="margin-top:12px">${(p.highlights||[]).map(h=>`<li>${esc(h)}</li>`).join('')}</ul></div>
+        <div class="glass" style="padding:26px"><h3>Itinerary</h3>${it}</div>
+        <div class="grid g2"><div class="glass" style="padding:26px"><h3>Included</h3><ul class="tick" style="margin-top:12px">${(p.inc||[]).map(h=>`<li>${esc(h)}</li>`).join('')}</ul></div>
+        <div class="glass" style="padding:26px"><h3>Not included</h3><ul class="tick x" style="margin-top:12px">${(p.exc||[]).map(h=>`<li>${esc(h)}</li>`).join('')}</ul></div></div>
+        <div class="glass" style="padding:20px;display:grid;gap:10px"><details><summary>Cancellation policy</summary><p>Free change of dates up to 7 days before travel. Cancellation charges depend on days left before departure. (Demo text — edit for your business.)</p></details>
+        <details><summary>Can I customise this package?</summary><p>Yes. Change days, hotel category, vehicle or add places. Send an enquiry and we’ll revise the quote.</p></details></div>
+      </div>
+      <aside class="glass sticky" style="padding:26px"><div class="muted" style="font-size:12px;font-weight:700;letter-spacing:.08em">FROM</div><div class="price" style="font-size:36px">${inr(p.price)}<small> / person</small></div>
+        <p class="muted" style="font-size:13px;margin:8px 0 18px">Twin sharing, vehicle & driver included. Final quote depends on dates and group size.</p>
+        <a class="btn primary" style="width:100%" href="#/enquiry?pkg=${p.id}">Enquire now →</a>
+        <a class="btn wa" style="width:100%;margin-top:10px" target="_blank" rel="noopener" href="${waLink('Hi MSV Holidays, I am interested in: '+p.title)}">💬 WhatsApp us</a></aside>
+    </div></div></section></div>`;
+};
+
+V.fleet=()=>`<div class="view"><section><div class="wrap">
+  <span class="tag glass">Cab rental</span><h2 class="serif" style="margin:12px 0 8px">Cabs & transfers</h2>
+  <p class="muted" style="max-width:60ch;margin-bottom:24px">Local, outstation and airport transfers across Tamil Nadu. Rates below are sample per-km values for the demo. Toll, parking and driver bata are shown in your quote.</p>
+  <div class="grid g3">${VEHICLES.map(v=>`<div class="glass hover rv" style="padding:26px"><div style="font-size:48px">${v.icon}</div><h3 style="margin:8px 0 2px">${v.name}</h3><p class="muted" style="font-size:13.5px">${v.ex} • ${v.seats} seats</p><div class="price" style="margin:14px 0">${inr(v.rate)}<small> / km</small></div><a class="btn light sm" href="#/enquiry?type=cab&veh=${v.id}">Book this →</a></div>`).join('')}</div>
+  <div class="grid g3" style="margin-top:20px">${[['📍','Local','4 hr / 8 hr city hire'],['🛣️','Outstation','One-way & round trip'],['✈️','Airport','Madurai, Trichy, Coimbatore']].map(x=>`<div class="glass" style="padding:22px;display:flex;gap:14px;align-items:center"><div class="icon">${x[0]}</div><div><b>${x[1]}</b><div class="muted" style="font-size:13px">${x[2]}</div></div></div>`).join('')}</div>
+</div></section></div>`;
+
+V.reviews=()=>{
+  const rv=DB.rv().filter(r=>r.ok);
+  const avg=rv.length?(rv.reduce((a,b)=>a+b.rating,0)/rv.length).toFixed(1):'—';
+  return `<div class="view"><section><div class="wrap">
+  <span class="tag glass">Reviews</span><h2 class="serif" style="margin:12px 0 22px">${avg} ★ from ${rv.length} travellers</h2>
+  <div class="two"><div class="grid g2">${rv.map(reviewCard).join('')||'<div class="glass empty">No reviews yet.</div>'}</div>
+  <form class="glass form sticky" id="rvForm"><h3 style="margin-bottom:14px">Share your trip</h3><div class="fgrid">
+    <label class="field full"><span>Name</span><input class="in" name="name" required maxlength="40"></label>
+    <label class="field full"><span>Trip</span><input class="in" name="trip" maxlength="60" placeholder="e.g. Ooty 4D"></label>
+    <label class="field full"><span>Rating</span><select class="in" name="rating"><option value="5">★★★★★ Excellent</option><option value="4">★★★★ Good</option><option value="3">★★★ Okay</option><option value="2">★★ Poor</option><option value="1">★ Bad</option></select></label>
+    <label class="field full"><span>Your review</span><textarea class="in" name="text" required maxlength="400"></textarea></label>
+    <button class="btn primary full">Submit review</button></div><p class="muted" style="font-size:12px;margin-top:10px">Reviews appear after approval.</p></form></div>
+  </div></section></div>`;
+};
+
+V.contact=()=>{
+  const s=DB.set();
+  return `<div class="view"><section><div class="wrap">
+  <span class="tag glass">Contact</span><h2 class="serif" style="margin:12px 0 22px">Talk to a real person.</h2>
+  <div class="grid g2"><div class="grid" style="gap:14px">
+    ${[['📞','Call',`<a href="tel:${esc(s.phone.replace(/\s/g,''))}">${esc(s.phone)}</a>`],['💬','WhatsApp',`<a target="_blank" rel="noopener" href="${waLink('Hi MSV Holidays')}">Message us</a>`],['✉️','Email',`<a href="mailto:${esc(s.email)}">${esc(s.email)}</a>`],['📍','Office',esc(s.addr)],['🕒','Hours',esc(s.hours)]].map(x=>`<div class="glass" style="padding:18px 20px;display:flex;gap:16px;align-items:center"><div class="icon">${x[0]}</div><div><div class="muted" style="font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase">${x[1]}</div><b>${x[2]}</b></div></div>`).join('')}
+  </div>
+  <div class="glass" style="padding:10px;min-height:340px;overflow:hidden"><iframe title="Map" loading="lazy" style="width:100%;height:100%;min-height:320px;border:0;border-radius:20px" src="https://www.openstreetmap.org/export/embed.html?bbox=78.05%2C9.88%2C78.18%2C9.98&layer=mapnik"></iframe></div></div>
+  <div style="margin-top:28px" class="glass form"><h3 style="margin-bottom:14px">FAQ</h3><div style="display:grid;gap:10px">
+    <details><summary>How fast will you reply?</summary><p>Usually within an hour in business hours.</p></details>
+    <details><summary>Is toll and parking included?</summary><p>Package quotes list them. Cab quotes show them separately.</p></details>
+    <details><summary>Can I pay in advance?</summary><p>A small advance confirms the booking. Balance is settled during the trip.</p></details></div></div>
+  </div></section></div>`;
+};
+
+V.enquiry=(q)=>{
+  const pk=DB.pk().filter(p=>p.active);
+  const type=q.type||(q.pkg?'package':'package');
+  const pre=q.pkg||'';const veh=q.veh||'';
+  return `<div class="view"><section><div class="wrap" style="max-width:860px">
+  <span class="tag glass">Enquiry</span><h2 class="serif" style="margin:12px 0 8px">Plan your trip.</h2><p class="muted" style="margin-bottom:22px">Fill what you know. We’ll fill the rest and reply on WhatsApp.</p>
+  <form class="glass form" id="eqForm" novalidate>
+    <div class="seg" style="margin-bottom:20px" id="typeSeg">
+      <label><input type="radio" name="type" value="package" ${type==='package'?'checked':''}><span>🧭 Tour package</span></label>
+      <label><input type="radio" name="type" value="cab" ${type==='cab'?'checked':''}><span>🚗 Cab rental</span></label>
+      <label><input type="radio" name="type" value="custom" ${type==='custom'?'checked':''}><span>✨ Custom trip</span></label>
+    </div>
+    <div class="fgrid">
+      <label class="field"><span>Your name *</span><input class="in" name="name" autocomplete="name" maxlength="60"><div class="err"></div></label>
+      <label class="field"><span>Mobile / WhatsApp *</span><input class="in" name="phone" inputmode="tel" autocomplete="tel" placeholder="98765 43210" maxlength="16"><div class="err"></div></label>
+      <label class="field full"><span>Email (optional)</span><input class="in" name="email" type="email" autocomplete="email"><div class="err"></div></label>
+
+      <label class="field full" data-show="package"><span>Package</span><select class="in" name="pkg"><option value="">Select package</option>${pk.map(p=>`<option value="${p.id}" ${p.id===pre?'selected':''}>${esc(p.title)} — ${inr(p.price)}</option>`).join('')}</select></label>
+      <label class="field" data-show="cab custom"><span>Pickup location</span><input class="in" name="pickup" placeholder="Madurai Airport, hotel…"></label>
+      <label class="field" data-show="cab custom"><span>Drop / destination</span><input class="in" name="drop" placeholder="Kodaikanal"></label>
+
+      <label class="field"><span>Travel date *</span><input class="in" type="date" name="date" min="${today()}" value="${esc(q.date||'')}"><div class="err"></div></label>
+      <label class="field"><span>Return date</span><input class="in" type="date" name="ret" min="${today()}"><div class="err"></div></label>
+      <label class="field"><span>Adults</span><input class="in" type="number" name="adults" min="1" max="60" value="${esc(q.adults||2)}"></label>
+      <label class="field"><span>Children</span><input class="in" type="number" name="kids" min="0" max="30" value="0"></label>
+
+      <div class="field full" data-show="cab custom package"><span>Vehicle</span><div class="vgrid">${VEHICLES.map(v=>`<label class="vopt"><input type="radio" name="vehicle" value="${v.id}" ${v.id===veh?'checked':''}><span>${v.icon} ${v.name}<small>${v.seats} seats</small></span></label>`).join('')}</div></div>
+
+      <label class="field" data-show="package custom"><span>Hotel category</span><select class="in" name="hotel"><option>Budget</option><option selected>Standard</option><option>Premium</option><option>No hotel needed</option></select></label>
+      <label class="field" data-show="package custom"><span>Meals</span><select class="in" name="meal"><option>None</option><option selected>Breakfast</option><option>Breakfast + Dinner</option><option>All meals</option></select></label>
+      <label class="field"><span>Budget (₹ total, optional)</span><input class="in" name="budget" inputmode="numeric" placeholder="25000"></label>
+      <label class="field" style="justify-content:end"><span>Flexible on dates?</span><label style="display:flex;gap:10px;align-items:center;padding:12px 4px"><input type="checkbox" name="flex" style="width:20px;height:20px;accent-color:#4d63e8"> Yes, ±2 days is fine</label></label>
+      <label class="field full"><span>Special requests</span><textarea class="in" name="msg" maxlength="500" placeholder="Child seat, elderly travellers, stops on the way…"></textarea></label>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px"><button class="btn primary" style="padding:14px 30px">Send enquiry →</button><span class="muted" style="font-size:12.5px">We use your details only to reply to this enquiry.</span></div>
+  </form></div></section></div>`;
+};
+
+V.done=(ref)=>{
+  const e=DB.eq().find(x=>x.ref===ref);
+  return `<div class="view"><section><div class="wrap" style="max-width:640px;text-align:center"><div class="glass form" style="padding:44px 28px"><div style="font-size:64px">🎉</div><h2 class="serif" style="margin:10px 0">Enquiry sent.</h2><p class="muted">Reference <b>${esc(ref)}</b>. We’ll reply within about an hour.</p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px"><a class="btn wa" target="_blank" rel="noopener" href="${waLink('Hi MSV Holidays, my enquiry ref is '+ref+(e?' ('+e.name+')':''))}">💬 Continue on WhatsApp</a><a class="btn light" href="#/">Home</a></div></div></div></section></div>`;
+};
+
+/* ---------- ADMIN ---------- */
+const adm={tab:'dash',f:'all',s:''};
+const isAdmin=()=>{try{return sessionStorage.getItem('msv_admin')==='1'}catch(e){return !!mem.admin}};
+const setAdmin=v=>{mem.admin=v;try{v?sessionStorage.setItem('msv_admin','1'):sessionStorage.removeItem('msv_admin')}catch(e){}};
+
+V.admin=()=>{
+  if(!isAdmin())return `<div class="view"><section><div class="wrap" style="max-width:440px"><form class="glass form" id="loginForm"><h2 class="serif" style="margin-bottom:6px">Admin</h2><p class="muted" style="font-size:13px;margin-bottom:18px">Demo login: <b>admin</b> / <b>msv@123</b></p>
+  <div class="fgrid"><label class="field full"><span>Username</span><input class="in" name="u" autocomplete="username"></label><label class="field full"><span>Password</span><input class="in" type="password" name="p" autocomplete="current-password"></label><button class="btn primary full">Sign in</button></div></form></div></section></div>`;
+  const eq=DB.eq(),pk=DB.pk(),rv=DB.rv();
+  const tabs=[['dash','📊 Dashboard'],['enq',`📨 Enquiries${eq.filter(e=>e.status==='new').length?` (${eq.filter(e=>e.status==='new').length})`:''}`],['pk','🧳 Packages'],['rv',`⭐ Reviews${rv.filter(r=>!r.ok).length?` (${rv.filter(r=>!r.ok).length})`:''}`],['set','⚙️ Settings']];
+  return `<div class="view"><section><div class="wrap"><div class="adm">
+    <aside class="glass side">${tabs.map(t=>`<button class="${adm.tab===t[0]?'on':''}" data-tab="${t[0]}">${t[1]}</button>`).join('')}<button data-act="logout" style="color:var(--bad)">↩ Sign out</button></aside>
+    <div id="admBody">${admBody()}</div></div></div></section></div>`;
+};
+function admBody(){
+  const eq=DB.eq(),pk=DB.pk(),rv=DB.rv();
+  if(adm.tab==='dash'){
+    const st=k=>eq.filter(e=>e.status===k).length;
+    return `<h2 class="serif" style="margin-bottom:18px">Dashboard</h2><div class="grid g4">
+      ${[['New enquiries',st('new')],['Accepted',st('accepted')],['Total enquiries',eq.length],['Active packages',pk.filter(p=>p.active).length],['Pending reviews',rv.filter(r=>!r.ok).length],['Quoted value',inr(eq.filter(e=>e.status==='accepted').reduce((a,b)=>a+(+b.quote||0),0))]].map(x=>`<div class="glass stat"><div class="muted" style="font-size:12px;font-weight:700">${x[0]}</div><b>${x[1]}</b></div>`).join('')}</div>
+      <h3 style="margin:26px 0 8px">Latest enquiries</h3>${enqTable(eq.slice().sort((a,b)=>b.created.localeCompare(a.created)).slice(0,5))}`;
+  }
+  if(adm.tab==='enq'){
+    let l=eq.slice().sort((a,b)=>b.created.localeCompare(a.created));
+    if(adm.f!=='all')l=l.filter(e=>e.status===adm.f);
+    if(adm.s)l=l.filter(e=>(e.name+e.phone+e.ref+e.dest).toLowerCase().includes(adm.s.toLowerCase()));
+    return `<div class="sec-h" style="margin-bottom:14px"><h2 class="serif">Enquiries</h2><button class="btn light sm" data-act="csv">⬇ Export CSV</button></div>
+    <div class="glass" style="padding:12px;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center"><input class="in" id="eqSearch" placeholder="Search name, phone, ref…" value="${esc(adm.s)}" style="flex:1;min-width:180px">
+    ${['all','new','contacted','accepted','rejected','completed'].map(s=>`<button class="chip ${adm.f===s?'on':''}" data-f="${s}">${s[0].toUpperCase()+s.slice(1)}</button>`).join('')}</div>${enqTable(l)}`;
+  }
+  if(adm.tab==='pk'){
+    return `<div class="sec-h" style="margin-bottom:14px"><h2 class="serif">Packages</h2><button class="btn primary sm" data-act="pk-new">+ New package</button></div>
+    <div class="tw"><table class="tbl"><thead><tr><th>Package</th><th>Days</th><th>Price</th><th>Status</th><th></th></tr></thead><tbody>${pk.map(p=>`<tr><td><b>${esc(p.emoji||'')} ${esc(p.title)}</b><div class="muted" style="font-size:12px">${esc(p.dest)} • ${esc(p.category)}${p.featured?' • ★ featured':''}</div></td><td>${p.days}</td><td>${inr(p.price)}</td><td><span class="st ${p.active?'accepted':'rejected'}">${p.active?'Live':'Hidden'}</span></td><td style="white-space:nowrap"><button class="btn light sm" data-pk-edit="${p.id}">Edit</button> <button class="btn light sm" data-pk-tog="${p.id}">${p.active?'Hide':'Show'}</button> <button class="btn danger sm" data-pk-del="${p.id}">Delete</button></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if(adm.tab==='rv'){
+    return `<h2 class="serif" style="margin-bottom:14px">Reviews</h2>${rv.length?`<div class="tw"><table class="tbl"><thead><tr><th>Guest</th><th>Review</th><th>Status</th><th></th></tr></thead><tbody>${rv.map(r=>`<tr><td><b>${esc(r.name)}</b><div class="muted" style="font-size:12px">${esc(r.trip)} • ${r.rating}★</div></td><td style="max-width:360px">${esc(r.text)}</td><td><span class="st ${r.ok?'accepted':'contacted'}">${r.ok?'Live':'Pending'}</span></td><td style="white-space:nowrap">${r.ok?'':`<button class="btn ok sm" data-rv-ok="${r.id}">Approve</button> `}<button class="btn danger sm" data-rv-del="${r.id}">Delete</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="glass empty">No reviews.</div>'}`;
+  }
+  const s=DB.set();
+  return `<h2 class="serif" style="margin-bottom:14px">Settings</h2><form class="glass form" id="setForm"><div class="fgrid">
+    <label class="field"><span>Phone (display)</span><input class="in" name="phone" value="${esc(s.phone)}"></label>
+    <label class="field"><span>WhatsApp (digits, with 91)</span><input class="in" name="wa" value="${esc(s.wa)}"></label>
+    <label class="field"><span>Email</span><input class="in" name="email" value="${esc(s.email)}"></label>
+    <label class="field"><span>Hours</span><input class="in" name="hours" value="${esc(s.hours)}"></label>
+    <label class="field full"><span>Address</span><input class="in" name="addr" value="${esc(s.addr)}"></label>
+    <button class="btn primary">Save settings</button><button type="button" class="btn danger" data-act="reset">Reset demo data</button></div></form>`;
+}
+function enqTable(list){
+  if(!list.length)return '<div class="glass empty">No enquiries here.</div>';
+  const pk=DB.pk();
+  return `<div class="tw"><table class="tbl"><thead><tr><th>Ref</th><th>Guest</th><th>Trip</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody>${list.map(e=>{const p=pk.find(x=>x.id===e.pkg);return `<tr><td><b>${esc(e.ref)}</b></td><td>${esc(e.name)}<div class="muted" style="font-size:12px">${esc(e.phone)}</div></td><td>${esc(e.type)}<div class="muted" style="font-size:12px">${esc(p?p.title:(e.drop||e.dest||'—'))}</div></td><td>${fmtD(e.date)}</td><td><span class="st ${esc(e.status)}">${esc(e.status)}</span></td><td><button class="btn light sm" data-eq-view="${e.id}">Open</button></td></tr>`}).join('')}</tbody></table></div>`;
+}
+function eqModal(id){
+  const e=DB.eq().find(x=>x.id===id);if(!e)return;
+  const p=DB.pk().find(x=>x.id===e.pkg);const v=VEHICLES.find(x=>x.id===e.vehicle);
+  const rows=[['Reference',e.ref],['Received',new Date(e.created).toLocaleString('en-IN')],['Type',e.type],['Name',e.name],['Phone',e.phone],['Email',e.email||'—'],['Package',p?p.title:'—'],['Pickup',e.pickup||'—'],['Drop / dest',e.drop||e.dest||'—'],['Travel date',fmtD(e.date)],['Return',e.ret?fmtD(e.ret):'—'],['Flexible',e.flex?'Yes':'No'],['Guests',`${e.adults} adults, ${e.kids} children`],['Vehicle',v?v.name:'—'],['Hotel / meals',`${e.hotel||'—'} / ${e.meal||'—'}`],['Budget',e.budget?inr(e.budget):'—'],['Message',e.msg||'—']];
+  openModal(`<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px"><h3>${esc(e.ref)} <span class="st ${esc(e.status)}">${esc(e.status)}</span></h3><button class="btn light sm" data-act="close">✕</button></div>
+  <dl class="kv">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>
+  <div class="fgrid" style="margin-top:18px"><label class="field"><span>Quoted amount (₹)</span><input class="in" id="eqQuote" inputmode="numeric" value="${esc(e.quote)}"></label><label class="field full"><span>Internal note</span><textarea class="in" id="eqNote">${esc(e.note)}</textarea></label></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+    <button class="btn ok sm" data-eq-st="${e.id}|accepted">✓ Accept</button><button class="btn light sm" data-eq-st="${e.id}|contacted">Contacted</button><button class="btn danger sm" data-eq-st="${e.id}|rejected">✕ Reject</button><button class="btn light sm" data-eq-st="${e.id}|completed">Completed</button><button class="btn light sm" data-eq-st="${e.id}|new">Reset</button>
+    <a class="btn wa sm" target="_blank" rel="noopener" href="https://wa.me/91${esc(String(e.phone).replace(/\D/g,'').slice(-10))}?text=${encodeURIComponent('Hi '+e.name+', this is MSV Holidays about your enquiry '+e.ref+'.'+(e.quote?' Quote: '+inr(e.quote)+'.':''))}">💬 Reply</a>
+    <button class="btn danger sm" data-eq-del="${e.id}" style="margin-left:auto">🗑 Delete</button></div>`);
+}
+function pkModal(id){
+  const p=id?DB.pk().find(x=>x.id===id):{title:'',dest:'',category:'Hill Station',days:3,price:5000,emoji:'🧳',hue:220,rating:4.5,featured:false,active:true,highlights:[],itinerary:[],inc:[],exc:[],img:''};
+  openModal(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h3>${id?'Edit':'New'} package</h3><button class="btn light sm" data-act="close">✕</button></div>
+  <form id="pkForm" data-id="${id||''}"><div class="fgrid">
+    <label class="field full"><span>Title *</span><input class="in" name="title" value="${esc(p.title)}" required></label>
+    <label class="field"><span>Destination *</span><input class="in" name="dest" value="${esc(p.dest)}" required></label>
+    <label class="field"><span>Category</span><select class="in" name="category">${CATS.map(c=>`<option ${c===p.category?'selected':''}>${c}</option>`).join('')}</select></label>
+    <label class="field"><span>Days</span><input class="in" type="number" min="1" max="30" name="days" value="${p.days}"></label>
+    <label class="field"><span>Price / person (₹)</span><input class="in" type="number" min="0" name="price" value="${p.price}"></label>
+    <label class="field"><span>Emoji</span><input class="in" name="emoji" value="${esc(p.emoji||'')}" maxlength="4"></label>
+    <label class="field"><span>Colour hue (0–360)</span><input class="in" type="number" min="0" max="360" name="hue" value="${p.hue||220}"></label>
+    <label class="field full"><span>Image URL (optional)</span><input class="in" name="img" value="${esc(p.img||'')}" placeholder="https://…"></label>
+    <label class="field full"><span>Highlights (one per line)</span><textarea class="in" name="highlights">${esc((p.highlights||[]).join('\n'))}</textarea></label>
+    <label class="field full"><span>Itinerary (one day per line: Title | Details)</span><textarea class="in" name="itinerary" style="min-height:140px">${esc((p.itinerary||[]).join('\n'))}</textarea></label>
+    <label class="field"><span>Inclusions (one per line)</span><textarea class="in" name="inc">${esc((p.inc||[]).join('\n'))}</textarea></label>
+    <label class="field"><span>Exclusions (one per line)</span><textarea class="in" name="exc">${esc((p.exc||[]).join('\n'))}</textarea></label>
+    <label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="featured" ${p.featured?'checked':''} style="width:20px;height:20px"> Featured</label>
+    <label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${p.active?'checked':''} style="width:20px;height:20px"> Live on website</label>
+    <button class="btn primary full">Save package</button></div></form>`);
+}
+function refreshAdm(){const b=$('#admBody');if(b){b.innerHTML=admBody();$$('.side button').forEach(x=>x.classList.toggle('on',x.dataset.tab===adm.tab));}}
+function csv(){
+  const rows=DB.eq();const h=['ref','created','type','name','phone','email','pkg','pickup','drop','dest','date','ret','adults','kids','vehicle','hotel','meal','budget','status','quote','note','msg'];
+  const c=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const txt=[h.join(',')].concat(rows.map(r=>h.map(k=>c(r[k])).join(','))).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/csv'}));a.download='msv-enquiries.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+
+/* ================= ROUTER ================= */
+let lenis=null,io=null,curKey='';
+function parse(){
+  const h=location.hash.replace(/^#/,'')||'/';const [path,qs]=h.split('?');
+  const q={};new URLSearchParams(qs||'').forEach((v,k)=>q[k]=v);
+  const seg=path.split('/').filter(Boolean);return {seg,q};
+}
+function render(){
+  const {seg,q}=parse();const name=seg[0]||'home';let html;
+  if(name==='home')html=V.home();
+  else if(name==='packages')html=V.packages(q);
+  else if(name==='package')html=V.package(seg[1]);
+  else if(name==='fleet')html=V.fleet();
+  else if(name==='reviews')html=V.reviews();
+  else if(name==='contact')html=V.contact();
+  else if(name==='enquiry')html=V.enquiry(q);
+  else if(name==='done')html=V.done(seg[1]);
+  else if(name==='admin')html=V.admin();
+  else html=V.home();
+  const key=name+(seg[1]||'');
+  const same=key===curKey&&name==='packages';
+  $('#app').innerHTML=html;
+  document.title=(name==='package'?(DB.pk().find(p=>p.id===seg[1])||{}).title+' — ':'')+'MSV Holidays';
+  $$('[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===(name==='package'?'packages':name)));
+  if(!same)toTop();
+  curKey=key;
+  if(name==='enquiry')syncType();
+  observe();
+  const s=DB.set();$('#wafab').href=waLink('Hi MSV Holidays, I need help planning a trip.');
+}
+function toTop(){if(lenis)lenis.scrollTo(0,{immediate:true});else window.scrollTo(0,0)}
+function observe(){
+  if(io)io.disconnect();
+  const els=$$('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+  io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.05});
+  els.forEach((e,i)=>{e.style.transitionDelay=Math.min(i%6,5)*60+'ms';io.observe(e)});
+}
+function syncType(){
+  const f=$('#eqForm');if(!f)return;const t=f.querySelector('[name=type]:checked').value;
+  $$('[data-show]',f).forEach(el=>el.style.display=el.dataset.show.split(' ').includes(t)?'':'none');
+}
+window.addEventListener('hashchange',render);
+
+/* ================= EVENTS (delegated) ================= */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-go],[data-cat],[data-tab],[data-f],[data-act],[data-eq-view],[data-eq-st],[data-eq-del],[data-pk-edit],[data-pk-tog],[data-pk-del],[data-rv-ok],[data-rv-del]');
+  if(!t)return;const d=t.dataset;
+  if(d.go){location.hash=d.go;return}
+  if(d.cat!==undefined&&t.classList.contains('chip')&&$('#flt')){const {q}=parse();q.cat=d.cat;setQ(q);return}
+  if(d.tab){adm.tab=d.tab;refreshAdm();return}
+  if(d.f){adm.f=d.f;refreshAdm();return}
+  if(d.act==='close'){closeModal();return}
+  if(d.act==='logout'){setAdmin(false);render();return}
+  if(d.act==='csv'){csv();return}
+  if(d.act==='pk-new'){pkModal();return}
+  if(d.act==='reset'){if(confirm('Reset all demo data?')){['packages','reviews','enq','settings'].forEach(k=>store.set(k,{}));store.set('packages',SEED_PK);store.set('reviews',SEED_RV);store.set('enq',SEED_EQ);store.set('settings',SEED_SET);toast('Demo data reset');refreshAdm()}return}
+  if(d.eqView){eqModal(d.eqView);return}
+  if(d.eqSt){
+    const [id,st]=d.eqSt.split('|');const l=DB.eq();const x=l.find(y=>y.id===id);if(!x)return;
+    x.status=st;const n=$('#eqNote'),q=$('#eqQuote');if(n)x.note=n.value;if(q)x.quote=q.value;
+    DB.saveEq(l);toast('Marked '+st);eqModal(id);refreshAdm();return}
+  if(d.eqDel){if(confirm('Delete this enquiry?')){DB.saveEq(DB.eq().filter(x=>x.id!==d.eqDel));closeModal();refreshAdm();toast('Deleted')}return}
+  if(d.pkEdit){pkModal(d.pkEdit);return}
+  if(d.pkTog){const l=DB.pk();const p=l.find(x=>x.id===d.pkTog);p.active=!p.active;DB.savePk(l);refreshAdm();return}
+  if(d.pkDel){if(confirm('Delete this package?')){DB.savePk(DB.pk().filter(x=>x.id!==d.pkDel));refreshAdm();toast('Package deleted')}return}
+  if(d.rvOk){const l=DB.rv();l.find(x=>x.id===d.rvOk).ok=true;DB.saveRv(l);refreshAdm();toast('Approved');return}
+  if(d.rvDel){DB.saveRv(DB.rv().filter(x=>x.id!==d.rvDel));refreshAdm();return}
 });
+function setQ(q){const s=new URLSearchParams();Object.keys(q).forEach(k=>q[k]&&s.set(k,q[k]));location.hash='#/packages'+(s.toString()?'?'+s:'')}
+document.addEventListener('change',e=>{
+  if(e.target.closest('#flt')){const {q}=parse();$$('#flt [name]').forEach(i=>q[i.name]=i.value);setQ(q)}
+  if(e.target.name==='type')syncType();
+});
+let st;document.addEventListener('input',e=>{
+  if(e.target.id==='eqSearch'){clearTimeout(st);const v=e.target.value;st=setTimeout(()=>{adm.s=v;refreshAdm();const i=$('#eqSearch');if(i){i.focus();i.setSelectionRange(v.length,v.length)}},220)}
+  if(e.target.closest('#flt')&&e.target.name==='s'){clearTimeout(st);st=setTimeout(()=>{const {q}=parse();q.s=e.target.value;setQ(q)},450)}
+  e.target.classList&&e.target.classList.remove('bad');
+});
+
+document.addEventListener('submit',e=>{
+  const f=e.target;e.preventDefault();
+  if(f.id==='qs'){const d=new FormData(f);location.hash=`#/enquiry?${new URLSearchParams({dest:d.get('dest')||'',date:d.get('date')||'',adults:d.get('adults')||2})}`;return}
+  if(f.id==='eqForm'){
+    const d=Object.fromEntries(new FormData(f));let ok=true;
+    const bad=(n,m)=>{const i=f.querySelector(`[name=${n}]`);i.classList.add('bad');const er=i.parentElement.querySelector('.err');if(er)er.textContent=m;if(ok)i.focus({preventScroll:false});ok=false};
+    $$('.err',f).forEach(x=>x.textContent='');
+    const ph=String(d.phone||'').replace(/\D/g,'').slice(-10);
+    if(!d.name||d.name.trim().length<2)bad('name','Enter your name');
+    if(!/^[6-9]\d{9}$/.test(ph))bad('phone','Enter a valid 10-digit mobile');
+    if(d.email&&!/^\S+@\S+\.\S+$/.test(d.email))bad('email','Check email format');
+    if(!d.date)bad('date','Pick a travel date');
+    if(d.ret&&d.date&&d.ret<d.date)bad('ret','Return is before travel date');
+    if(!ok)return;
+    const l=DB.eq();const n=1000+l.length+1+Math.floor(Math.random()*50);let ref='MSV-'+n;while(l.some(x=>x.ref===ref))ref='MSV-'+(++n);
+    const p=DB.pk().find(x=>x.id===d.pkg);
+    l.push({id:uid(),ref,type:d.type,name:d.name.trim(),phone:ph,email:d.email||'',pkg:d.pkg||'',dest:p?p.dest:'',pickup:d.pickup||'',drop:d.drop||'',date:d.date,ret:d.ret||'',flex:!!d.flex,adults:+d.adults||1,kids:+d.kids||0,vehicle:d.vehicle||'',hotel:d.hotel||'',meal:d.meal||'',budget:d.budget||'',msg:d.msg||'',status:'new',note:'',quote:'',created:new Date().toISOString()});
+    DB.saveEq(l);location.hash='#/done/'+ref;return}
+  if(f.id==='rvForm'){
+    const d=Object.fromEntries(new FormData(f));const l=DB.rv();
+    l.unshift({id:uid(),name:d.name.trim(),trip:d.trip||'',rating:+d.rating,text:d.text.trim(),date:today(),ok:false});DB.saveRv(l);f.reset();toast('Thanks! Review sent for approval.');return}
+  if(f.id==='loginForm'){
+    const d=Object.fromEntries(new FormData(f));
+    if(d.u==='admin'&&d.p==='msv@123'){setAdmin(true);render()}else toast('Wrong username or password');return}
+  if(f.id==='setForm'){DB.saveSet(Object.fromEntries(new FormData(f)));toast('Settings saved');return}
+  if(f.id==='pkForm'){
+    const d=Object.fromEntries(new FormData(f));const l=DB.pk();const id=f.dataset.id;
+    const obj={title:d.title.trim(),dest:d.dest.trim(),category:d.category,days:Math.max(1,+d.days||1),price:+d.price||0,emoji:d.emoji||'🧳',hue:+d.hue||220,img:(d.img||'').trim(),
+      highlights:lines(d.highlights),itinerary:lines(d.itinerary),inc:lines(d.inc),exc:lines(d.exc),featured:!!d.featured,active:!!d.active};
+    if(obj.img&&!/^https?:\/\//i.test(obj.img))obj.img='';
+    if(id){const p=l.find(x=>x.id===id);Object.assign(p,obj)}else l.unshift(Object.assign({id:uid(),rating:4.5},obj));
+    DB.savePk(l);closeModal();refreshAdm();toast('Package saved');return}
+});
+
+/* ================= SMOOTH SCROLL ================= */
+function initLenis(){
+  if(lenis||!window.Lenis||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  try{
+    lenis=new Lenis({duration:1.1,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,wheelMultiplier:.95,touchMultiplier:1.4,anchors:false});
+    const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
+  }catch(err){lenis=null}
+}
+window.addEventListener('load',initLenis);
+const lt=setInterval(()=>{if(window.Lenis){initLenis();clearInterval(lt)}},300);setTimeout(()=>clearInterval(lt),6000);
+
+/* ================= BOOT ================= */
+seed();render();
+})();
 </script>
 </body>
 </html>
